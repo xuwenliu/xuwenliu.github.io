@@ -193,3 +193,19 @@ s.repeat(-1) //RangeError 参数是负数或者Infinity，会报错。
 s.repeat(1.9) //abcabc 参数如果是小数，会被取整。
 s.repeat(-0.5) // "" 参数是 0 到-1 之间的小数，则等同于 0，这是因为会先进行取整运算。0 到-1 之间的小数，取整以后等于-0，repeat视同为 0。
 ```
+
+### ES5的类
+1.构造函数 实例属性和方法
+ ```javascript
+function Person() {
+    this.name = "tom";
+    this.age = 20;
+    this.speak = function(){
+        console.log(this.name + ':' + this.age);
+    }
+}
+
+let p = new Person();
+console.log(p.name); //tom
+p.speak(); // tom:20
+ ```
