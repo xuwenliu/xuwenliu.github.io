@@ -1,7 +1,8 @@
 ---
-title: JavasSript 常用集锦
+title: JavaScript 常用集锦
 index_img: /img/js.jpg
 tags: [JS]
+category: 技术
 abbrlink: f94fb1be
 date: 2020-03-11 17:20:00
 ---

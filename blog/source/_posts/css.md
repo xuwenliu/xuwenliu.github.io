@@ -2,6 +2,7 @@
 title: CSS 常用集锦
 index_img: /img/css.jpg
 tags: [CSS]
+category: 技术
 abbrlink: f94fb1be
 date: 2020-03-11 14:55:00
 ---

@@ -2,6 +2,7 @@
 title: Vue 常用集锦
 index_img: /img/vue.jpg
 tags: [Vue]
+category: 技术
 abbrlink: f94fb1be
 date: 2020-03-11 17:06:00
 ---

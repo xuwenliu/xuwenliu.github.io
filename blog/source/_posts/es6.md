@@ -2,6 +2,7 @@
 title: ES6/ES7 常用集锦
 index_img: /img/es6.jpg
 tags: [ES6,ES7]
+category: 技术
 abbrlink: f94fb1be
 date: 2020-03-11 17:32:00
 ---

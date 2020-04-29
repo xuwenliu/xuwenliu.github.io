@@ -2,6 +2,7 @@
 title: Taro 采坑指南
 index_img: /img/taro.png
 tags: [Taro,小程序]
+category: 技术
 abbrlink: f94fb1be
 date: 2020-03-12 16:00:00
 ---
