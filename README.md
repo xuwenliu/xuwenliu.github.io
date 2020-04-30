@@ -15,3 +15,7 @@
 + git add .
 + git commit -am ""
 + git push
+
+
+### 5.hexo fluid主题
+https://fluid-dev.github.io/hexo-fluid-docs/guide/
