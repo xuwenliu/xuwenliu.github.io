@@ -198,16 +198,14 @@
 <li><p>Remote：远程仓库</p>
 </li>
 </ul>
-<h3 id="2、git操作的场景"><a href="#2、git操作的场景" class="headerlink" title="2、git操作的场景"></a>2、git操作的场景</h3><p><strong>1）新建代码仓库</strong></p>
-<pre><code># 在当前目录新建一个Git代码库
+<h3 id="2、新建代码仓库"><a href="#2、新建代码仓库" class="headerlink" title="2、新建代码仓库"></a>2、新建代码仓库</h3><pre><code># 在当前目录新建一个Git代码库
 $ git init
 
 # 新建一个目录，将其初始化为Git代码库
 $ git init [project-name]
 
 # 下载一个项目和它的整个代码历史
-$ git clone [url]</code></pre><p><strong>2）配置git</strong></p>
-<pre><code class="js"># 显示当前的Git配置
+$ git clone [url]</code></pre><h3 id="3、配置git"><a href="#3、配置git" class="headerlink" title="3、配置git"></a>3、配置git</h3><pre><code class="js"># 显示当前的Git配置
 $ git config --list
 
 # 编辑Git配置文件
@@ -216,8 +214,7 @@ $ git config -e [--global]
 # 设置提交代码时的用户信息
 $ git config [--global] user.name &quot;[name]&quot;
 $ git config [--global] user.email &quot;[email address]&quot;</code></pre>
-<p><strong>3）增加/删除文件</strong></p>
-<pre><code class="js"># 添加指定文件到暂存区
+<h3 id="4、增加-删除文件"><a href="#4、增加-删除文件" class="headerlink" title="4、增加/删除文件"></a>4、增加/删除文件</h3><pre><code class="js"># 添加指定文件到暂存区
 $ git add [file1] [file2] ...
 
 # 添加指定目录到暂存区，包括子目录
@@ -225,8 +222,7 @@ $ git add [dir]
 
 # 添加当前目录的所有文件到暂存区
 $ git add .</code></pre>
-<p><strong>4）代码提交</strong></p>
-<pre><code class="js"># 提交暂存区到仓库区
+<h3 id="5、代码提交"><a href="#5、代码提交" class="headerlink" title="5、代码提交"></a>5、代码提交</h3><pre><code class="js"># 提交暂存区到仓库区
 $ git commit -m [message]
 
 # 提交暂存区的指定文件到仓库区
@@ -244,8 +240,7 @@ $ git commit --amend -m [message]
 
 # 重做上一次commit，并包括指定文件的新变化
 $ git commit --amend [file1] [file2] ...</code></pre>
-<p><strong>5）分支</strong></p>
-<pre><code class="js"># 列出所有本地分支
+<h3 id="6、分支"><a href="#6、分支" class="headerlink" title="6、分支"></a>6、分支</h3><pre><code class="js"># 列出所有本地分支
 $ git branch
 
 # 列出所有远程分支
@@ -281,8 +276,7 @@ $ git branch -d [branch-name]
 # 删除远程分支
 $ git push origin --delete [branch-name]
 $ git branch -dr [remote/branch]</code></pre>
-<p><strong>6）标签</strong></p>
-<pre><code class="js"># 列出所有tag
+<h3 id="7、标签"><a href="#7、标签" class="headerlink" title="7、标签"></a>7、标签</h3><pre><code class="js"># 列出所有tag
 $ git tag
 
 # 新建一个tag在当前commit
@@ -305,8 +299,7 @@ $ git push [remote] [tag]
 
 # 提交所有tag
 $ git push [remote] --tags</code></pre>
-<p><strong>7）查看信息</strong></p>
-<pre><code class="js"># 显示有变更的文件
+<h3 id="8、查看信息"><a href="#8、查看信息" class="headerlink" title="8、查看信息"></a>8、查看信息</h3><pre><code class="js"># 显示有变更的文件
 $ git status
 
 # 显示当前分支的版本历史
@@ -347,8 +340,7 @@ $ git show [commit]:[filename]
 
 # 显示当前分支的最近几次提交
 $ git reflog</code></pre>
-<p><strong>8）远程同步</strong></p>
-<pre><code class="js"># 下载远程仓库的所有变动
+<h3 id="9、远程同步"><a href="#9、远程同步" class="headerlink" title="9、远程同步"></a>9、远程同步</h3><pre><code class="js"># 下载远程仓库的所有变动
 $ git fetch [remote]
 
 # 显示所有远程仓库
@@ -373,8 +365,7 @@ $ git push [remote] --force
 $ git push [remote] --all
 # 更新远程分支列表
 $ git remote update origin -p</code></pre>
-<p><strong>9）撤销</strong></p>
-<pre><code class="js"># 恢复暂存区的指定文件到工作区
+<h3 id="10、撤销"><a href="#10、撤销" class="headerlink" title="10、撤销"></a>10、撤销</h3><pre><code class="js"># 恢复暂存区的指定文件到工作区
 $ git checkout [file]
 
 # 恢复某个commit的指定文件到暂存区和工作区
@@ -401,7 +392,7 @@ $ git reset --keep [commit]
 # 暂时将未提交的变化移除，稍后再移入
 $ git stash
 $ git stash pop</code></pre>
-<h3 id="Git参考手册："><a href="#Git参考手册：" class="headerlink" title="Git参考手册："></a>Git参考手册：</h3><p><a href="http://gitref.justjavac.com/index.html" target="_blank" rel="noopener">http://gitref.justjavac.com/index.html</a></p>
+<h3 id="11、远程同步Git参考手册"><a href="#11、远程同步Git参考手册" class="headerlink" title="11、远程同步Git参考手册"></a>11、远程同步Git参考手册</h3><p><a href="http://gitref.justjavac.com/index.html" target="_blank" rel="noopener">http://gitref.justjavac.com/index.html</a></p>
 
             </div>
             <hr>
