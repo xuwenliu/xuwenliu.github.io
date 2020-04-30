@@ -1,0 +1,4 @@
+/* custom style */
+.markdown-body blockquote {
+    border-left: 0.25em solid #52c41a;
+  }

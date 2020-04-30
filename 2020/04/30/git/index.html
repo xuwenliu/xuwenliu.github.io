@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="xu wen liu">
   <meta name="keywords" content="">
-  <title>Taro 采坑指南 - NeverGiveUpT</title>
+  <title>Git 使用方法 - NeverGiveUpT</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -136,7 +136,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期四, 三月 12日 2020, 4:00 下午
+                  星期四, 四月 30日 2020, 7:27 晚上
                 </p>
               
 
@@ -153,7 +153,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      6 分钟
+                      5 分钟
                   </span>
                 
 
@@ -181,199 +181,227 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <h3 id="在Taro中如何正确给自定义组件传递样式类"><a href="#在Taro中如何正确给自定义组件传递样式类" class="headerlink" title="在Taro中如何正确给自定义组件传递样式类"></a>在Taro中如何正确给自定义组件传递样式类</h3><p>需要利用 externalClasses 定义段定义若干个外部样式类。这个特性从小程序基础库版本 1.9.90 开始支持。</p>
-<pre><code class="js">/* CustomComp.js */
-export default class CustomComp extends Component {
-  static externalClasses = [&#39;my-class&#39;]
+              <h2 id="Git-使用方法"><a href="#Git-使用方法" class="headerlink" title="Git 使用方法"></a>Git 使用方法</h2><h3 id="常用git操作"><a href="#常用git操作" class="headerlink" title="常用git操作"></a>常用git操作</h3><blockquote>
+<pre><code>+ 新建分支并切换到新分支      git checkout -b [branch-name]
++ 删除本地分支                git branch -d [branch-name]
++ 删除远程分支                git push origin --delete [branch-name]
++ 重置暂存区与工作区，与上一次commit保持一致     git reset --hard
++ 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变 git reset [commit]</code></pre></blockquote>
+<h3 id="1、git工作空间"><a href="#1、git工作空间" class="headerlink" title="1、git工作空间"></a>1、git工作空间</h3><p><img src="/img/git.png" srcset="/img/loading.gif" alt="git"></p>
+<ul>
+<li><p>Workspace: 工作区</p>
+</li>
+<li><p>Index/Stage：暂存区</p>
+</li>
+<li><p>Repository: 仓库区（或本地仓库）</p>
+</li>
+<li><p>Remote：远程仓库</p>
+</li>
+</ul>
+<h3 id="2、git操作的场景"><a href="#2、git操作的场景" class="headerlink" title="2、git操作的场景"></a>2、git操作的场景</h3><p><strong>1）新建代码仓库</strong></p>
+<pre><code># 在当前目录新建一个Git代码库
+$ git init
 
-  render () {
-    return &lt;View className=&quot;my-class&quot;&gt;这段文本的颜色由组件外的 class 决定&lt;/View&gt;
-  }
-}
-</code></pre>
-<pre><code class="js">/* MyPage.js */
-export default class MyPage extends Component {
-  render () {
-    return &lt;CustomComp my-class=&quot;red-text&quot; /&gt;
-  }
-}
-</code></pre>
-<pre><code class="scss">/* MyPage.scss */
-.red-text {
-  color: red;
-}
-</code></pre>
-<p>注意：externalClasses 需要使用 短横线命名法 (kebab-case)，而不是 React 惯用的 驼峰命名法 (camelCase)。否则无效。</p>
-<h3 id="父组件的样式类完全影响子组件"><a href="#父组件的样式类完全影响子组件" class="headerlink" title="父组件的样式类完全影响子组件"></a>父组件的样式类完全影响子组件</h3><p>使用外部样式类可以让组件使用指定的组件外样式类，如果希望组件外样式类能够完全影响组件内部，可以将组件构造器中的 options.addGlobalClass 字段置为 true。这个特性从小程序基础库版本 2.2.3 开始支持。</p>
-<pre><code class="js">/* CustomComp.js */
-export default class CustomComp extends Component {
-  static options = {
-    addGlobalClass: true
-  }
+# 新建一个目录，将其初始化为Git代码库
+$ git init [project-name]
 
-  render () {
-    return &lt;View className=&quot;red-text&quot;&gt;这段文本的颜色由组件外的 class 决定&lt;/View&gt;
-  }
-}</code></pre>
-<pre><code class="css">/* 组件外的样式定义 */
-.red-text {
-  color: red;
-}</code></pre>
-<h3 id="在Taro中给子组件传递属性时，不能使用-…-拓展操作符"><a href="#在Taro中给子组件传递属性时，不能使用-…-拓展操作符" class="headerlink" title="在Taro中给子组件传递属性时，不能使用 … 拓展操作符"></a>在Taro中给子组件传递属性时，不能使用 … 拓展操作符</h3><pre><code class="js">const props = {firstName: &#39;Plus&#39;, lastName: &#39;Second&#39;}
-return &lt;Greeting {...props} /&gt; //错误
-return &lt;Greeting firstName=&quot;Plus&quot; lastName=&quot;Second&quot; /&gt; //正确</code></pre>
-<h3 id="在Taro中如何阻止事件冒泡"><a href="#在Taro中如何阻止事件冒泡" class="headerlink" title="在Taro中如何阻止事件冒泡"></a>在Taro中如何阻止事件冒泡</h3><p>在 Taro 中你不能使用 <code>catchEvent</code> 的方式阻止事件冒泡。你必须明确的使用 <code>e.stopPropagation</code>。例如，阻止事件冒泡你可以这样写：</p>
-<pre><code class="js">class Toggle extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {isToggleOn: true}
-  }
+# 下载一个项目和它的整个代码历史
+$ git clone [url]</code></pre><p><strong>2）配置git</strong></p>
+<pre><code class="js"># 显示当前的Git配置
+$ git config --list
 
-  onClick = (e) =&gt; {
-    e.stopPropagation()
-    this.setState(prevState =&gt; ({
-      isToggleOn: !prevState.isToggleOn
-    }))
-  }
+# 编辑Git配置文件
+$ git config -e [--global]
 
-  render () {
-    return (
-      &lt;button onClick={this.onClick}&gt;
-        {this.state.isToggleOn ? &#39;ON&#39; : &#39;OFF&#39;}
-      &lt;/button&gt;
-    )
-  }
-}</code></pre>
-<h3 id="Taro中事件处理的传参方式"><a href="#Taro中事件处理的传参方式" class="headerlink" title="Taro中事件处理的传参方式"></a>Taro中事件处理的传参方式</h3><p>1.使用 <code>bind</code> 方式向监听函数传参，在类组件中定义的监听函数，事件对象 <code>e</code> 要排在所传递参数的后面。</p>
-<pre><code class="js">class Popper extends Component {
-  constructor () {
-    super(...arguments)
-    this.state = { name:&#39;Hello world!&#39; }
-  }
+# 设置提交代码时的用户信息
+$ git config [--global] user.name &quot;[name]&quot;
+$ git config [--global] user.email &quot;[email address]&quot;</code></pre>
+<p><strong>3）增加/删除文件</strong></p>
+<pre><code class="js"># 添加指定文件到暂存区
+$ git add [file1] [file2] ...
 
-  // 你可以通过 bind 传入多个参数
-  preventPop (name, test, e) {    //事件对象 e 要放在最后
-    e.stopPropagation()
-  }
+# 添加指定目录到暂存区，包括子目录
+$ git add [dir]
 
-  render () {
-    return &lt;Button onClick={this.preventPop.bind(this, this.state.name, &#39;test&#39;)}&gt;&lt;/Button&gt;
-  }
-}
-</code></pre>
-<p>2.使用<code>匿名函数</code><br>直接写匿名函数不会打乱原有监听函数的参数顺序。<br>注意：在各小程序端，使用匿名函数，尤其是在 <code>循环中</code> 使用匿名函数，比使用 <code>bind</code> 进行事件传参占用更大的内存，速度也会更慢。</p>
-<pre><code class="js">class Popper extends Component {
-  constructor () {
-    super(...arguments)
-    this.state = { name: &#39;Hello world!&#39; }
-  }
+# 添加当前目录的所有文件到暂存区
+$ git add .</code></pre>
+<p><strong>4）代码提交</strong></p>
+<pre><code class="js"># 提交暂存区到仓库区
+$ git commit -m [message]
 
-  render () {
-    const name = &#39;test&#39;
-    return (
-      &lt;Button onClick={(e) =&gt; {
-        e.stopPropagation()
-        this.setState({
-          name
-        })
-      }}&gt;
-        {this.state.name}
-      &lt;/Button&gt;
-    )
-  }
-}</code></pre>
-<p>3.<a href="https://zh.wikipedia.org/wiki/%E6%9F%AF%E9%87%8C%E5%8C%96" target="_blank" rel="noopener">柯里化</a></p>
-<pre><code class="js">class Title extends Component{
+# 提交暂存区的指定文件到仓库区
+$ git commit [file1] [file2] ... -m [message]
 
-  handleClick = (index) =&gt; (e) =&gt; {
-    e.stopPropagation()
-    this.setState({
-      currentIndex: index
-    })
-  }
+# 提交工作区自上次commit之后的变化，直接到仓库区
+$ git commit -a
 
-  render() {
-    const { currentIndex } = this.props;
-    return (
-      {/* 调用 `this.handleClick(currentIndex)` 会返回一个函数，这个函数可以访问到 `currentIndex` 同时也能满足 `onClick` 的签名 */}
-      &lt;View onClick={this.handleClick(currentIndex)}&gt;
-      &lt;/View&gt;
-    )
-  }
- }</code></pre>
-<p>4.函数式组件传递方式<br>在函数式组件中，事件传参可以传入<code>事件的引用</code>也可以传入<code>匿名函数</code>，以下是函数式组件配合 <code>useCallback</code> 的一个例子：</p>
-<pre><code class="js">const App = () =&gt; {
-  const [c1, setC1] = useState(0);
-  const [c2, setC2] = useState(0);
-  const [c3, setC3] = useState(0);
+# 提交时显示所有diff信息
+$ git commit -v
 
-  const increment = c =&gt; c + 1
+# 使用一次新的commit，替代上一次提交
+# 如果代码没有任何新变化，则用来改写上一次commit的提交信息
+$ git commit --amend -m [message]
 
-  // 只有 useCallback 对应的 c1 或 c2 的值改变时，才会返回新的函数
-  const increment1 = useCallback(() =&gt; setC1(increment), [c1]);
-  const increment2 = useCallback(() =&gt; setC2(increment), [c2]);
+# 重做上一次commit，并包括指定文件的新变化
+$ git commit --amend [file1] [file2] ...</code></pre>
+<p><strong>5）分支</strong></p>
+<pre><code class="js"># 列出所有本地分支
+$ git branch
 
-  return (&lt;View&gt;
-    &lt;Text&gt; Counter 1 is {c1} &lt;/Text&gt;
-    &lt;Text&gt; Counter 2 is {c2} &lt;/Text&gt;
-    &lt;Text&gt; Counter 3 is {c3} &lt;/Text&gt;
-    &lt;View&gt;
-      &lt;Button onClick={increment1}&gt;Increment Counter 1&lt;/Button&gt;
-      &lt;Button onClick={increment2}&gt;Increment Counter 2&lt;/Button&gt;
-      &lt;Button onClick={() =&gt; setC3(increment)}&gt;Increment Counter 3&lt;/Button&gt;
-    &lt;/View&gt;
-  &lt;/View&gt;)
-}</code></pre>
-<p>5.任何组件的事件传递都要以 <code>on</code> 开头<br>在 v1.3.0-beta.0 之后，自定义组件间的事件传递可以不用 <code>on</code> 开头，但内置组件的事件依然是以 <code>on</code> 开头的，为了一致性我们仍然推荐你以 <code>on</code> 开头命名你的事件。</p>
-<pre><code class="js">const element = &lt;View onClick={this.onTag} /&gt;
-const element2 = &lt;Input onFocus={this.onFocus} /&gt;
-const element3 = &lt;CustomElement onAnimationEnd={this.props.onAnimationEnd} /&gt;
-</code></pre>
-<h3 id="Taro中巧用逻辑运算符-amp-amp-和-三元运算符-以及-枚举-来实现条件渲染"><a href="#Taro中巧用逻辑运算符-amp-amp-和-三元运算符-以及-枚举-来实现条件渲染" class="headerlink" title="Taro中巧用逻辑运算符 &amp;&amp; 和 三元运算符 以及 枚举 来实现条件渲染"></a>Taro中巧用逻辑运算符 &amp;&amp; 和 三元运算符 以及 枚举 来实现条件渲染</h3><pre><code class="js">class LoginStatus extends Component {
-  render () {
-    const isLoggedIn = this.props.isLoggedIn
+# 列出所有远程分支
+$ git branch -r
 
-    return (
-      &lt;View&gt;
-        {isLoggedIn &amp;&amp; &lt;Text&gt;已登录&lt;/Text&gt;}
-        {!isLoggedIn &amp;&amp; &lt;Text&gt;未登录&lt;/Text&gt;}
+# 列出所有本地分支和远程分支
+$ git branch -a
 
-        {isLoggedIn
-            ? &lt;Text&gt;已登录&lt;/Text&gt;
-            : &lt;Text&gt;未登录&lt;/Text&gt;
-        }
+# 新建一个分支，但依然停留在当前分支
+$ git branch [branch-name]
 
-      &lt;/View&gt;
-    )
-  }
-}</code></pre>
-<pre><code class="js">function Loading (props) {
-  const { loadingText, LOADING_STATUS, loadingStatus, onRetry } = props
-  return (
-    &lt;View className=&#39;loading-status&#39;&gt;
-      {
-        {
-          &#39;loading&#39;: loadingText,
-          &#39;fail&#39;: &lt;View onClick={onRetry}&gt; 加载失败, 点击重试 &lt;/View&gt;,
-          &#39;no-more&#39;: &#39;没有更多了&#39;
-        }[loadingStatus] /** loadingStatus 是 `loading`、`fail`、`no-more`  其中一种状态 **/
-      }
-    &lt;/View&gt;
-  )
-}</code></pre>
-<h3 id="Taro中循环渲染-原生小程序组件-需要指定taroKeys"><a href="#Taro中循环渲染-原生小程序组件-需要指定taroKeys" class="headerlink" title="Taro中循环渲染 原生小程序组件 需要指定taroKeys"></a>Taro中循环渲染 原生小程序组件 需要指定taroKeys</h3><p><code>taroKey</code> 适用于循环渲染原生小程序组件，赋予每个元素唯一确定标识，转换为小程序的 <code>wx:key</code>。</p>
-<pre><code class="js">const numbers = [...Array(100).keys()] // [0, 1, 2, ..., 98, 99]
-const listItems = numbers.map((number) =&gt; {
-  return (
-    // native component
-    &lt;g-list
-      taroKey={String(number)}
-      className=&#39;g-list&#39;
-    &gt;
-    我是第 {number + 1} 个数字
-    &lt;/g-list&gt;
-  )
-})</code></pre>
+# 新建一个分支，并切换到该分支
+$ git checkout -b [branch]
+
+# 新建一个分支，与指定的远程分支建立追踪关系
+$ git branch --track [branch] [remote-branch]
+
+# 切换到指定分支，并更新工作区
+$ git checkout [branch-name]
+
+# 切换到上一个分支
+$ git checkout -
+
+# 建立追踪关系，在现有分支与指定的远程分支之间
+$ git branch --set-upstream [branch] [remote-branch]
+
+# 合并指定分支到当前分支
+$ git merge [branch]
+
+# 删除分支
+$ git branch -d [branch-name]
+
+# 删除远程分支
+$ git push origin --delete [branch-name]
+$ git branch -dr [remote/branch]</code></pre>
+<p><strong>6）标签</strong></p>
+<pre><code class="js"># 列出所有tag
+$ git tag
+
+# 新建一个tag在当前commit
+$ git tag [tag]
+
+# 新建一个tag在指定commit
+$ git tag [tag] [commit]
+
+# 删除本地tag
+$ git tag -d [tag]
+
+# 删除远程tag
+$ git push origin :refs/tags/[tagName]
+
+# 查看tag信息
+$ git show [tag]
+
+# 提交指定tag
+$ git push [remote] [tag]
+
+# 提交所有tag
+$ git push [remote] --tags</code></pre>
+<p><strong>7）查看信息</strong></p>
+<pre><code class="js"># 显示有变更的文件
+$ git status
+
+# 显示当前分支的版本历史
+$ git log
+
+# 显示commit历史，以及每次commit发生变更的文件
+$ git log --stat
+
+# 搜索提交历史，根据关键词
+$ git log -S [keyword]
+
+# 显示指定文件相关的每一次diff
+$ git log -p [file]
+
+# 显示过去5次提交
+$ git log -5 --pretty --oneline
+
+# 显示暂存区和工作区的差异
+$ git diff
+
+# 显示暂存区和上一个commit的差异
+$ git diff --cached [file]
+
+# 显示工作区与当前分支最新commit之间的差异
+$ git diff HEAD
+
+# 显示两次提交之间的差异
+$ git diff [first-branch]...[second-branch]
+
+# 显示某次提交的元数据和内容变化
+$ git show [commit]
+
+# 显示某次提交发生变化的文件
+$ git show --name-only [commit]
+
+# 显示某次提交时，某个文件的内容
+$ git show [commit]:[filename]
+
+# 显示当前分支的最近几次提交
+$ git reflog</code></pre>
+<p><strong>8）远程同步</strong></p>
+<pre><code class="js"># 下载远程仓库的所有变动
+$ git fetch [remote]
+
+# 显示所有远程仓库
+$ git remote -v
+
+# 显示某个远程仓库的信息
+$ git remote show [remote]
+
+# 增加一个新的远程仓库，并命名
+$ git remote add [shortname] [url]
+
+# 取回远程仓库的变化，并与本地分支合并
+$ git pull [remote] [branch]
+
+# 上传本地指定分支到远程仓库
+$ git push [remote] [branch]
+
+# 强行推送当前分支到远程仓库，即使有冲突
+$ git push [remote] --force
+
+# 推送所有分支到远程仓库
+$ git push [remote] --all
+# 更新远程分支列表
+$ git remote update origin -p</code></pre>
+<p><strong>9）撤销</strong></p>
+<pre><code class="js"># 恢复暂存区的指定文件到工作区
+$ git checkout [file]
+
+# 恢复某个commit的指定文件到暂存区和工作区
+$ git checkout [commit] [file]
+
+# 恢复暂存区的所有文件到工作区
+$ git checkout .
+
+# 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+$ git reset [file]
+
+# 重置暂存区与工作区，与上一次commit保持一致
+$ git reset --hard
+
+# 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
+$ git reset [commit]
+
+# 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
+$ git reset --hard [commit]
+
+# 重置当前HEAD为指定commit，但保持暂存区和工作区不变
+$ git reset --keep [commit]
+
+# 暂时将未提交的变化移除，稍后再移入
+$ git stash
+$ git stash pop</code></pre>
+<h3 id="Git参考手册："><a href="#Git参考手册：" class="headerlink" title="Git参考手册："></a>Git参考手册：</h3><p><a href="http://gitref.justjavac.com/index.html" target="_blank" rel="noopener">http://gitref.justjavac.com/index.html</a></p>
 
             </div>
             <hr>
@@ -392,9 +420,7 @@ const listItems = numbers.map((number) =&gt; {
                   <span>
                 <i class="iconfont icon-tag"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Taro/">Taro</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>
+                      <a class="hover-with-bg" href="/tags/git/">git</a>
                     
                   </span>
                 
@@ -566,7 +592,7 @@ const listItems = numbers.map((number) =&gt; {
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Taro 采坑指南&nbsp;",
+        "Git 使用方法&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
