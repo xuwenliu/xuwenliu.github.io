@@ -161,6 +161,112 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/05/07/ts/type-inference/" target="_blank">
+          <img src="/img/ts/ts.jpg" srcset="/img/loading.gif" alt="TS中的类型推论"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/05/07/ts/type-inference/">
+        <p class="h4 index-header">TS中的类型推论</p>
+      </a>
+
+      <a href="/2020/05/07/ts/type-inference/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">1.什么是类型推论
+TypeScript里，在有些没有明确指出类型的地方，类型推论会帮助提供类型
+
+let x = 3;
+变量x的类型被推断为数字。 这种推断发生在初始化变量和成员，设置默认参数值和决定函数返回值时。
+2.最佳通用类型
+当需要从几个表达式中推断类型时候，会使用这些表达式的类型来推断出一个最合适的通用类型。
+
+let x = [0, 1, null];
+为了推断x的类型，我们必须考虑所有元素的类型。这里有两种选择： number和null。计算通用类型算法会考虑所有的候选类型，并给出一个兼容所有候选类型的类型。
+由于最终的通用类型取自候选类型，有些时候候选类型共享相同的通用类型，</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-07&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/TS/">TS</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/05/07/life/you-konw/" target="_blank">
+          <img src="/img/life/sk-ll/sk-ll.jpg" srcset="/img/loading.gif" alt="你一定要知道的护肤品牌"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/05/07/life/you-konw/">
+        <p class="h4 index-header">你一定要知道的护肤品牌</p>
+      </a>
+
+      <a href="/2020/05/07/life/you-konw/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">1.洗面奶 芙丽芳丝（freeplus）（￥150）
+氨基酸洗面奶，以温和无刺激著称。也刚好适合油痘肌使用。主打就是温和、无添加、低刺激，敏感肌用会很好，温和舒适 很舒服
+
+官网：https://www.freeplus.cn/freeplus/products/skincare05/
+
+2.爽肤水/护肤精华露 SK-ll神仙水 （￥1540）
+SK-II 护肤精华露（神仙水®）改变你的肌肤，令肌肤变得晶莹剔透，嫩滑、紧致、焕发动人光彩。35 年来始终如一。备受瞩目、畅销全球的 SK-II 护肤精华露（神仙水®）蕴含超过90%的天然生物成分PITERA™，集维生素、矿物质和氨基酸等多种微量营养</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-07&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8A%A4%E8%82%A4/">护肤</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/05/06/ts/enum/" target="_blank">
           <img src="/img/ts/ts.jpg" srcset="/img/loading.gif" alt="TS中的枚举"
                class="index-img img-fluid rounded index-thumbnails">
@@ -605,110 +711,6 @@ if(sex === 1){
     </div>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/03/12/taro/taro/" target="_blank">
-          <img src="/img/taro.png" srcset="/img/loading.gif" alt="Taro 采坑指南"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/03/12/taro/taro/">
-        <p class="h4 index-header">Taro 采坑指南</p>
-      </a>
-
-      <a href="/2020/03/12/taro/taro/">
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在Taro中如何正确给自定义组件传递样式类需要利用 externalClasses 定义段定义若干个外部样式类。这个特性从小程序基础库版本 1.9.90 开始支持。
-/* CustomComp.js */
-export default class CustomComp extends Component {
-  static externalClasses = [&#39;my-class&#39;]
-
-  render () {
-    return &lt;View className=&quot;my-class&quot;&gt;这段文本的颜色由组件外的 class 决定&lt;/Vi</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-12&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Taro/">Taro</a>&nbsp;
-          
-            <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2020/03/11/css/es6/" target="_blank">
-          <img src="/img/es6.jpg" srcset="/img/loading.gif" alt="ES6/ES7 常用集锦"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/03/11/css/es6/">
-        <p class="h4 index-header">ES6/ES7 常用集锦</p>
-      </a>
-
-      <a href="/2020/03/11/css/es6/">
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">SetA.使用Set处理数组去重和删除元素，Set是es6新增的一种数据结构，它和数组非常相似，但是成员的值都是唯一的，没有重复的值。提供4个语义化的API：1.add(value);添加某个值，返回Set结构本身。2.delete(value);删除某个值，返回一个布尔值，表示删除是否成功。3.has(value);返回一个布尔值，表示改值是否为Set的成员。4.clear();清除所有成员，没有返回值。
-let arr= [1,2,3,4,4,5,5,5];
-let set = new Set(arr);
-console.log(...set); //1 2 3 4 5
-注意：这个方法对元</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-11&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/ES6/">ES6</a>&nbsp;
-          
-            <a href="/tags/ES7/">ES7</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
 
 
   <nav aria-label="index posts navigation">
@@ -879,6 +881,57 @@ console.log(...set); //1 2 3 4 5
 
 
 
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
 
 
 

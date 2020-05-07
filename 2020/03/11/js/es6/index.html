@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="xu wen liu">
+  <meta name="keywords" content="">
+  <title>ES6/ES7 常用集锦 - NeverGiveUpT</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>NeverGiveUpT</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">友链</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  2020-03-11 17:32:00
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.2k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      5 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p
+                class="note note-warning">本文最后更新于：2020-05-07 20:59:01</p>
+            
+            <div class="markdown-body">
+              <h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p>A.使用Set处理数组去重和删除元素，Set是es6新增的一种数据结构，它和数组非常相似，但是成员的值都是唯一的，没有重复的值。提供4个语义化的API：<br>1.<code>add(value)</code>;添加某个值，返回Set结构本身。<br>2.<code>delete(value)</code>;删除某个值，返回一个布尔值，表示删除是否成功。<br>3.<code>has(value)</code>;返回一个布尔值，表示改值是否为Set的成员。<br>4.<code>clear()</code>;清除所有成员，没有返回值。</p>
+<pre><code class="javascript">let arr= [1,2,3,4,4,5,5,5];
+let set = new Set(arr);
+console.log(...set); //1 2 3 4 5</code></pre>
+<p>注意：这个方法对元素为对象的数组不奏效。Set判断元素是否重复的方法类似于<code>===</code>。</p>
+<p>B.删除数组中指定的元素：</p>
+<pre><code class="javascript">const arr = [1,2,3];//例如删除数组中值为2的元素
+const index = arr.indexOf(2);
+if(index != -1){
+    arr.splice(index,1);
+}
+console.log(arr); //[1,3]
+
+//使用set
+const arr = [1,2,3];
+const set = new Set(arr);
+set.delete(2);
+arr = [...set];
+console.log(arr); //[1,3]</code></pre>
+<p>C.使用<code>map()</code>方法和对象解构语法提取字段</p>
+<pre><code class="javascript">let studentInfo = [
+    { name: &#39;Alice&#39;, age: 18, no: 2 },
+    { name: &#39;Bob&#39;, age: 16, no: 5 },
+    { name: &#39;Candy&#39;, age: 17, no: 3 },
+    { name: &#39;Den&#39;, age: 18, no: 4 },
+    { name: &#39;Eve&#39;, age: 16, no: 1 },
+]
+const nameList = studentInfo.map(({name}) =&gt; name);
+console.log(nameList); //[&quot;Alice&quot;, &quot;Bob&quot;, &quot;Candy&quot;, &quot;Den&quot;, &quot;Eve&quot;]</code></pre>
+<p>D.使用<code>filter()</code>方法和对象解构语法过滤字段</p>
+<pre><code class="javascript">let studentInfo = [
+    { name: &#39;Alice&#39;, age: 18, no: 2 },
+    { name: &#39;Bob&#39;, age: 16, no: 5 },
+    { name: &#39;Candy&#39;, age: 17, no: 3 },
+    { name: &#39;Den&#39;, age: 18, no: 4 },
+    { name: &#39;Eve&#39;, age: 16, no: 1 },
+]
+const newStudentInfo = studentInfo.filter(({age}) =&gt; age&gt;17);
+console.log(newStudentInfo); //[ { name: &#39;Alice&#39;, age: 18, no: 2 }, { name: &#39;Den&#39;, age: 18, no: 4 }]</code></pre>
+<p>E.数组遍历使用<code>for in</code>,<code>forEach</code>,<code>for of</code></p>
+<pre><code class="javascript">let studentInfo = [
+    { name: &#39;Alice&#39;, age: 18, no: 2 },
+    { name: &#39;Bob&#39;, age: 16, no: 5 },
+    { name: &#39;Candy&#39;, age: 17, no: 3 },
+    { name: &#39;Den&#39;, age: 18, no: 4 },
+    { name: &#39;Eve&#39;, age: 16, no: 1 },
+]
+for(let i in studentInfo) {
+    console.log(i);//下标
+    console.log(studentInfo[i]);
+}
+studentInfo.forEach((value,index,arr) =&gt; {
+    console.log(value);
+    console.log(index);
+    console.log(arr);
+})
+
+for(let i of studentInfo) {
+    console.log(i);//每一项的值 { name: &#39;Alice&#39;, age: 18, no: 2 }
+}</code></pre>
+<p>F.最短的代码创建一个长度为6，每个值为8的数组</p>
+<pre><code class="javascript">Array(6).fill(8); //[8, 8, 8, 8, 8, 8]</code></pre>
+<p>更多详细参考：<a href="http://es6.ruanyifeng.com/#docs/set-map" target="_blank" rel="noopener">阮一峰大神</a></p>
+<h3 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h3><pre><code class="javascript">//数组解构
+let [a, b, c] = [4, 5, 6]; //a=4,b=5,c=6
+
+
+//解构不成功其值为undefined
+let [a] = []; //a = undefined
+let [a, b] = [1];//b = undefined
+
+
+//对象解构
+let { a, b, c} = { b: &quot;aaa&quot;, a: &quot;bbb&quot; };
+//a = &quot;bbb&quot;
+//b = &quot;aaa&quot;
+//c = undefined
+
+
+let { a : b } = { a: &quot;aaa&quot;, c: &quot;bbb&quot; };
+//b = &quot;aaa&quot;
+//a  error: foo is not defined
+//a是匹配的模式，b才是变量。真正被赋值的是变量baz，而不是模式foo。
+
+
+//字符串解构
+const [a, b, c, d, e] = &#39;hello&#39;;
+a // &quot;h&quot;
+b // &quot;e&quot;
+c // &quot;l&quot;
+d // &quot;l&quot;
+e // &quot;o&quot;
+
+
+//函数参数解构
+function add([a, b]){
+    return a + b;
+}
+
+add([1, 2]); // 3
+
+
+常见的用途
+
+// 1.交换变量的值
+let x = 1;
+let y = 2;
+[x, y] = [y, x];
+
+// 2.函数返回值
+
+// 返回一个数组
+function num() {
+return [1, 2, 3];
+}
+let [a, b, c] = num();
+
+// 返回一个对象
+function example() {
+    return {
+        a: 1,
+        b: 2
+    };
+}
+let { a, b } = example();
+
+// 3.解析json数据
+let json = {
+    id: 1,
+    status: 404,
+    data: [123, 456]
+};
+let { id, status, data: number } = json;
+console.log(id, status, number);// 1, 404, [123, 456]</code></pre>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>1.模板字符串<br>2.JavaScript 只有<code>indexOf</code>方法，可以用来确定一个字符串是否包含在另一个字符串中。ES6 又提供了三种新方法。<br>    1.<code>includes(target,[index])</code>：返回布尔值，表示是否找到了参数字符串。<br>    2.<code>startsWith(target,[index])</code>：返回布尔值，表示参数字符串是否在原字符串的头部。<br>    3.<code>endsWith(target,[index])</code>：返回布尔值，表示参数字符串是否在原字符串的尾部。<br>    <code>target</code> 目标字符串，<code>index</code>可选参数 开始搜索的位置</p>
+<pre><code class="javascript">let s = &#39;Hello world!&#39;;
+s.startsWith(&#39;Hello&#39;) // true
+s.endsWith(&#39;!&#39;) // true
+s.includes(&#39;o&#39;) // true
+s.startsWith(&#39;world&#39;, 6) // true
+s.endsWith(&#39;Hello&#39;, 5) // true
+s.includes(&#39;Hello&#39;, 6) // false</code></pre>
+<p>3.<code>str.repeat(n)</code>方法 返回一个新字符串，表示将原字符串重复n次。 n可以是大于-1的数</p>
+<pre><code class="javascript">let s = &quot;abc&quot;;
+s.repeat(3); //abcabcabc 参数为NaN 等同于 0
+s.repeat(-1) //RangeError 参数是负数或者Infinity，会报错。
+s.repeat(1.9) //abcabc 参数如果是小数，会被取整。
+s.repeat(-0.5) // &quot;&quot; 参数是 0 到-1 之间的小数，则等同于 0，这是因为会先进行取整运算。0 到-1 之间的小数，取整以后等于-0，repeat视同为 0。</code></pre>
+<h3 id="ES5的类"><a href="#ES5的类" class="headerlink" title="ES5的类"></a>ES5的类</h3><p>1.构造函数 实例属性和方法</p>
+<pre><code class="javascript">function Person() {
+    this.name = &quot;tom&quot;;
+    this.age = 20;
+    this.speak = function(){
+        console.log(this.name + &#39;:&#39; + this.age);
+    }
+}
+
+let p = new Person();
+console.log(p.name); //tom
+p.speak(); // tom:20</code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ES6/">ES6</a>
+                    
+                      <a class="hover-with-bg" href="/tags/ES7/">ES7</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <script defer src="https://utteranc.es/client.js"
+          repo="https://xuwenliu.github.io/"
+          issue-term="title"
+  
+          label="utterances"
+    
+          theme="github-light"
+          crossorigin="anonymous"
+  >
+  </script>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "ES6/ES7 常用集锦&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
+
+
+
+
+
+
+
+
+</body>
+</html>

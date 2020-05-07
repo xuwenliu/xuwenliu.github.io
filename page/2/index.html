@@ -161,6 +161,110 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/12/taro/taro/" target="_blank">
+          <img src="/img/taro.png" srcset="/img/loading.gif" alt="Taro 采坑指南"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/03/12/taro/taro/">
+        <p class="h4 index-header">Taro 采坑指南</p>
+      </a>
+
+      <a href="/2020/03/12/taro/taro/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">在Taro中如何正确给自定义组件传递样式类需要利用 externalClasses 定义段定义若干个外部样式类。这个特性从小程序基础库版本 1.9.90 开始支持。
+/* CustomComp.js */
+export default class CustomComp extends Component {
+  static externalClasses = [&#39;my-class&#39;]
+
+  render () {
+    return &lt;View className=&quot;my-class&quot;&gt;这段文本的颜色由组件外的 class 决定&lt;/Vi</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-12&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Taro/">Taro</a>&nbsp;
+          
+            <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/11/js/es6/" target="_blank">
+          <img src="/img/es6.jpg" srcset="/img/loading.gif" alt="ES6/ES7 常用集锦"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/03/11/js/es6/">
+        <p class="h4 index-header">ES6/ES7 常用集锦</p>
+      </a>
+
+      <a href="/2020/03/11/js/es6/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">SetA.使用Set处理数组去重和删除元素，Set是es6新增的一种数据结构，它和数组非常相似，但是成员的值都是唯一的，没有重复的值。提供4个语义化的API：1.add(value);添加某个值，返回Set结构本身。2.delete(value);删除某个值，返回一个布尔值，表示删除是否成功。3.has(value);返回一个布尔值，表示改值是否为Set的成员。4.clear();清除所有成员，没有返回值。
+let arr= [1,2,3,4,4,5,5,5];
+let set = new Set(arr);
+console.log(...set); //1 2 3 4 5
+注意：这个方法对元</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-11&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/ES6/">ES6</a>&nbsp;
+          
+            <a href="/tags/ES7/">ES7</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/03/11/js/js/" target="_blank">
           <img src="/img/js.jpg" srcset="/img/loading.gif" alt="JavaScript 常用集锦"
                class="index-img img-fluid rounded index-thumbnails">
@@ -482,6 +586,57 @@ v-html=&quot;$options.filters.过滤器名称(需要过滤的内容,[过滤器�
 
 
 
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
 
 
 
