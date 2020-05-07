@@ -19,3 +19,6 @@
 
 ### 5.hexo fluid主题
 https://fluid-dev.github.io/hexo-fluid-docs/guide/
+
+### 6.hexo fluid 添加valine 评论功能
+https://valine.js.org/quickstart.html
