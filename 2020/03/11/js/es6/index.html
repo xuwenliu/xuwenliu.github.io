@@ -379,16 +379,31 @@ p.speak(); // tom:20</code></pre>
               <div class="comments" id="comments">
                 
                 
-  <script defer src="https://utteranc.es/client.js"
-          repo="xuwenliu/xuwenliu.github.io"
-          issue-term="title"
-  
-          label="utterances"
-    
-          theme="github-light"
-          crossorigin="anonymous"
-  >
+  <div id="vcomments"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script type="text/javascript">
+    var notify = 'false' === 'true';
+    var verify = 'false' === 'true';
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "RVi2nheifsyLgdNUtOODWrEk-gzGzoHsz",
+        app_key: "IcQeTY6Y778SNjPL5dwy9JOs",
+        placeholder: "说点什么",
+        avatar: "/retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
   </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
 
 
               </div>
