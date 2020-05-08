@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="xu wen liu">
   <meta name="keywords" content="">
-  <title>标签 - NeverGiveUpT</title>
+  <title>TS中的Symbol - NeverGiveUpT</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -47,7 +47,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -123,7 +123,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/tags.jpg') no-repeat center center;
+         style="background: url('/img/post.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -132,6 +132,33 @@
               
             </span>
 
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  2020-05-08 20:26:00
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    505 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      2 分钟
+                  </span>
+                
+
+                
+              </p>
             
           </div>
 
@@ -143,24 +170,160 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/CSS/" style="font-size: 15px; color: #bbe">CSS</a> <a href="/tags/ES6/" style="font-size: 15px; color: #bbe">ES6</a> <a href="/tags/ES7/" style="font-size: 15px; color: #bbe">ES7</a> <a href="/tags/JS/" style="font-size: 22.5px; color: #779bd3">JS</a> <a href="/tags/TS/" style="font-size: 30px; color: #337ab7">TS</a> <a href="/tags/Taro/" style="font-size: 15px; color: #bbe">Taro</a> <a href="/tags/Vue/" style="font-size: 15px; color: #bbe">Vue</a> <a href="/tags/git/" style="font-size: 15px; color: #bbe">git</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 15px; color: #bbe">小程序</a> <a href="/tags/%E6%81%8B%E7%88%B1/" style="font-size: 15px; color: #bbe">恋爱</a> <a href="/tags/%E6%8A%A4%E8%82%A4/" style="font-size: 15px; color: #bbe">护肤</a>
-</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p
+                class="note note-warning">本文最后更新于：2020-05-08 20:26:39</p>
+            
+            <div class="markdown-body">
+              <h3 id="1-ES6新增基本数据类型"><a href="#1-ES6新增基本数据类型" class="headerlink" title="1.ES6新增基本数据类型"></a>1.ES6新增基本数据类型</h3><blockquote>
+<p>自ECMAScript 2015起，<code>symbol</code>成为了一种新的原生类型，表示独一无二的值。就像<code>number</code>和<code>string</code>一样。它是 JavaScript 语言的第七种数据类型，前六种是：<code>undefined</code>、<code>null</code>、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。<code>symbol</code>类型的值是通过<code>Symbol</code>构造函数创建的。</p>
+</blockquote>
+<pre><code class="ts">let sym1 = Symbol();
+let sym2 = Symbol(&quot;key&quot;); // 可选的字符串key</code></pre>
+<p>注意，<code>Symbol</code>函数前不能使用<code>new</code>命令，否则会报错。这是因为生成的 Symbol 是一个原始类型的值，不是对象。也就是说，由于 Symbol 值不是对象，所以不能添加属性。基本上，它是一种类似于字符串的数据类型。</p>
+<p>如何访问Symbol的描述，如上及如何访问到 “key”</p>
+<p><a href="https://github.com/tc39/proposal-Symbol-description" target="_blank" rel="noopener">ES2019</a> 提供了一个实例属性<code>description</code>，直接返回 Symbol 的描述。</p>
+<pre><code class="ts">const sym = Symbol(&#39;key&#39;);
+sym.description // &quot;key&quot;</code></pre>
+<h3 id="2-Symbol是不可改变且唯一的"><a href="#2-Symbol是不可改变且唯一的" class="headerlink" title="2.Symbol是不可改变且唯一的"></a>2.Symbol是不可改变且唯一的</h3><pre><code class="ts">// 无参数的情况
+let sym2 = Symbol();
+let sym3 = Symbol();
+
+sym2 === sym3; // false, symbol是唯一的
+
+// 有参数的情况
+let s1 = Symbol(&#39;foo&#39;);
+let s2 = Symbol(&#39;foo&#39;);
+
+s1 === s2 // false, symbol是唯一的</code></pre>
+<h3 id="3-Symbol-值不能与其他类型的值进行运算"><a href="#3-Symbol-值不能与其他类型的值进行运算" class="headerlink" title="3.Symbol 值不能与其他类型的值进行运算"></a>3.Symbol 值不能与其他类型的值进行运算</h3><pre><code class="ts">let sym = Symbol(&#39;My symbol&#39;);
+
+&quot;your symbol is &quot; + sym   // TypeError: can&#39;t convert symbol to string
+`your symbol is ${sym}`   // TypeError: can&#39;t convert symbol to string</code></pre>
+<p>但是，Symbol 值可以显式转为字符串。</p>
+<pre><code class="ts">let sym = Symbol(&#39;My symbol&#39;);
+
+String(sym) // &#39;Symbol(My symbol)&#39;
+sym.toString() // &#39;Symbol(My symbol)&#39;</code></pre>
+<p>Symbol 值也可以转为布尔值，但是不能转为数值。</p>
+<pre><code class="ts">let sym = Symbol();
+Boolean(sym) // true
+!sym  // false
+
+if (sym) {
+  // ...
+}
+
+Number(sym) // TypeError
+sym + 2 // TypeError</code></pre>
+<h3 id="4-Symbol可以被用做对象属性的键"><a href="#4-Symbol可以被用做对象属性的键" class="headerlink" title="4.Symbol可以被用做对象属性的键"></a>4.Symbol可以被用做对象属性的键</h3><pre><code class="ts">let sym1 = Symbol();
+let obj = {
+    [sym1]: &quot;value&quot;
+};
+
+console.log(obj[sym1]); // &quot;value&quot;</code></pre>
+<h3 id="5-Symbol可以与计算出的属性名声明相结合来声明对象的属性和类成员"><a href="#5-Symbol可以与计算出的属性名声明相结合来声明对象的属性和类成员" class="headerlink" title="5.Symbol可以与计算出的属性名声明相结合来声明对象的属性和类成员"></a>5.Symbol可以与计算出的属性名声明相结合来声明对象的属性和类成员</h3><pre><code class="ts">const sym = Symbol();
+
+class Abc {
+    [sym](){
+       return &quot;ABC&quot;;
+    }
+}
+
+let c = new Abc();
+let className = c[sym](); // &quot;ABC&quot;</code></pre>
+<h3 id="6-内置的-Symbol-值"><a href="#6-内置的-Symbol-值" class="headerlink" title="6.内置的 Symbol 值"></a>6.内置的 Symbol 值</h3><p>参考：<a href="https://es6.ruanyifeng.com/#docs/symbol#内置的-Symbol-值" target="_blank" rel="noopener">https://es6.ruanyifeng.com/#docs/symbol#%E5%86%85%E7%BD%AE%E7%9A%84-Symbol-%E5%80%BC</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/TS/">TS</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script type="text/javascript">
+    var notify = 'false' === 'true';
+    var verify = 'false' === 'true';
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "RVi2nheifsyLgdNUtOODWrEk-gzGzoHsz",
+        app_key: "IcQeTY6Y778SNjPL5dwy9JOs",
+        placeholder: "说点什么",
+        avatar: "/retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
 
               </div>
-            </div>
+            
           </div>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -225,6 +388,57 @@
 
 
 
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
 
 
 
@@ -251,7 +465,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "标签&nbsp;",
+        "TS中的Symbol&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
