@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>TS中的迭代器和生成器</title>
+    <link href="/2020/05/09/ts/iterators-generators/"/>
+    <url>/2020/05/09/ts/iterators-generators/</url>
+    
+    <content type="html"><![CDATA[<h3 id="1-可迭代性"><a href="#1-可迭代性" class="headerlink" title="1.可迭代性"></a>1.可迭代性</h3><p>当一个对象实现了Symbol.iterator属性时，我们认为它是可迭代的。 一些内置的类型如 Array，Map，Set，String，Int32Array，Uint32Array等都已经实现了各自的Symbol.iterator。 对象上的 Symbol.iterator函数负责返回供迭代的值。</p><h3 id="2-for-of语句"><a href="#2-for-of语句" class="headerlink" title="2.for..of语句"></a>2.for..of语句</h3><p>for..of会遍历可迭代的对象，调用对象上的Symbol.iterator方法。 下面是在数组上使用 for..of的简单例子：</p><pre><code class="ts">let someArray = [1, &quot;aaa&quot;, false];for (let entry of someArray) {    console.log(entry); // 1, &quot;aaa&quot;, false}</code></pre><h3 id="3-for-of与for-in语句的区别"><a href="#3-for-of与for-in语句的区别" class="headerlink" title="3.for..of与for..in语句的区别"></a>3.for..of与for..in语句的区别</h3><p>for..of和for..in均可迭代一个列表；但是用于迭代的值却不同，for..in迭代的是对象的<code>键</code>的列表，而for..of则迭代对象的<code>键对应的值</code>。</p><pre><code class="ts">let list = [4, 5, 6];for (let i in list) {    console.log(i); // &quot;0&quot;, &quot;1&quot;, &quot;2&quot;,}for (let i of list) {    console.log(i); // &quot;4&quot;, &quot;5&quot;, &quot;6&quot;}</code></pre><p>另一个区别是for..in可以操作任何对象；它提供了查看对象属性的一种方法。 但是 for..of关注于迭代对象的值。内置对象Map和Set已经实现了Symbol.iterator方法，让我们可以访问它们保存的值。</p><pre><code class="ts">let pets = new Set([&quot;Cat&quot;, &quot;Dog&quot;, &quot;Hamster&quot;]);pets[&quot;species&quot;] = &quot;mammals&quot;;for (let pet in pets) {    console.log(pet); // &quot;species&quot;}for (let pet of pets) {    console.log(pet); // &quot;Cat&quot;, &quot;Dog&quot;, &quot;Hamster&quot;}</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>TS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>恋爱小技巧</title>
     <link href="/2020/05/08/life/reply/"/>
     <url>/2020/05/08/life/reply/</url>
