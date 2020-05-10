@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="xu wen liu">
+  <meta name="keywords" content="">
+  <title>React-hooks - NeverGiveUpT</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>NeverGiveUpT</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">友链</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  2020-05-10 17:10:00
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.5k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      6 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p
+                class="note note-warning">本文最后更新于：2020-05-10 22:19:46</p>
+            
+            <div class="markdown-body">
+              <h3 id="1-useState"><a href="#1-useState" class="headerlink" title="1.useState"></a>1.useState</h3><p>这个就太简单了，不多做介绍</p>
+<h3 id="2-useEffect"><a href="#2-useEffect" class="headerlink" title="2.useEffect"></a>2.useEffect</h3><p>函数组件能保存状态，但是对于异步请求，副作用的操作还是无能为力，所以 React 提供了 useEffect 来帮助开发者处理函数组件的副作用</p>
+<pre><code class="js">import React, { useState, useEffect } from &quot;react&quot;;
+import ReactDOM from &quot;react-dom&quot;;
+let timer = null;
+
+function App() {
+  const [count, setCount] = useState(0);
+  useEffect(() =&gt; {
+      document.title = &quot;componentDidMount&quot; + count;
+    },[count]);
+
+  useEffect(() =&gt; {
+    timer = setInterval(() =&gt; {
+      setCount(prevCount =&gt; prevCount + 1);
+    }, 1000);
+    return () =&gt; {
+      document.title = &quot;componentWillUnmount&quot;;
+      clearInterval(timer);
+    };
+  }, []);
+
+  return (
+    &lt;div&gt;
+      Count: {count}
+      &lt;button onClick={() =&gt; clearInterval(timer)}&gt;clear&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+const rootElement = document.getElementById(&quot;root&quot;);
+ReactDOM.render(&lt;App /&gt;, rootElement);</code></pre>
+<p>  1.第一个参数接收一个函数，可以用来做一些副作用比如异步请求，修改外部参数等行为<br>  2.第二个参数称之为dependencies，是一个数组，如果数组中的值变化才会触发 执行useEffect 第一个参数中的函数<br>  3.返回值(如果有)则在组件销毁或者调用函数前调用  用来代替componentWillUnmount<br>  4.第二个参数：</p>
+<ul>
+<li>不传递  代表不监听任何参数变化。每次渲染DOM之后，都会执行useEffect中的函数。</li>
+<li>传递空数组[] 这种情况下只有在组件初始化或销毁的时候才会触发，用来代替 componentDidMount 和 componentWillUnmount</li>
+<li>传递[count] 理解起来就是一旦 count 值发生改变，则修改 documen.title 值； 用来代替componentDidUpdate</li>
+</ul>
+<h3 id="3-模拟一个-componentDidUpdate"><a href="#3-模拟一个-componentDidUpdate" class="headerlink" title="3.模拟一个 componentDidUpdate"></a>3.模拟一个 componentDidUpdate</h3><pre><code class="js">function useUpdate(fn) {
+  // useRef 创建一个引用
+  const mounting = useRef(true);
+  useEffect(() =&gt; {
+    if (mounting.current) {
+      mounting.current = false;
+    } else {
+      fn();
+    }
+  });
+}</code></pre>
+<h3 id="4-useContext"><a href="#4-useContext" class="headerlink" title="4.useContext"></a>4.useContext</h3><blockquote>
+<p>跨组件传值（依赖createContext）<br>useContext用来处理多层级传递数据的方式，在以前组件树种，跨层级祖先组件想要给孙子组件传递数据的时候，除了一层层 props 往下透传之外，我们还可以使用 React Context API 来帮我们做这件事</p>
+</blockquote>
+<pre><code class="js">//1.从react中导入useContext和createContext
+import React, { useContext,createContext } from &quot;react&quot;;
+import ReactDOM from &quot;react-dom&quot;;
+
+const { Provider, Consumer } = createContext(null);
+
+//2.调用createContext 接受一个初始化参数
+const colorContext = createContext({
+  color: &quot;blue&quot;
+});
+
+function Bar() {
+  //3.把colorContext传递给useContext 返回值即是想要透传的数据了
+  //传递给 useContext 的是 context 而不是 consumer
+  const colors = useContext(colorContext);
+  return (
+    &lt;Consumer&gt;
+      {color =&gt; (
+        &lt;&gt;
+          &lt;div&gt;{color}&lt;/div&gt;
+          &lt;h2&gt;我是用useContext传过来的值 {colors.color}&lt;/h2&gt;
+        &lt;/&gt;
+      )}
+    &lt;/Consumer&gt;
+  );
+}
+
+function Foo() {
+  return &lt;Bar /&gt;;
+}
+
+function App() {
+  return (
+    &lt;Provider value={&quot;grey&quot;}&gt;
+      &lt;Foo /&gt;
+    &lt;/Provider&gt;
+  );
+}
+
+const rootElement = document.getElementById(&quot;root&quot;);
+ReactDOM.render(&lt;App /&gt;, rootElement);</code></pre>
+<h3 id="5-useCallback"><a href="#5-useCallback" class="headerlink" title="5.useCallback"></a>5.useCallback</h3><blockquote>
+<p>常用于记忆事件函数，生成记忆后的事件函数并传递给子组件使用<br>参考链接：<a href="https://juejin.im/post/5dd337985188252a1873730f?utm_source=gold_browser_extension" target="_blank" rel="noopener">https://juejin.im/post/5dd337985188252a1873730f?utm_source=gold_browser_extension</a></p>
+</blockquote>
+<p>1.作用是：获得一个记忆后的函数<br>2.第一个参数接收一个函数，且不会执行第一个参数函数，而是将它返回给你<br>3.第二个参数传入一个数组，数组中的每一项一旦值或者引用发生改变，useCallback 就会重新返回一个新的记忆函数提供给后面进行渲染。<br>4.这样只要子组件继承了 PureComponent 或者使用 React.memo 就可以有效避免不必要的 VDOM 渲染。</p>
+<pre><code class="js">function App() {
+  const memoizedHandleClick = useCallback(() =&gt; {
+    console.log(&#39;Click happened&#39;)
+  }, []); // 空数组代表无论什么情况下该函数都不会发生改变
+  return &lt;SomeComponent onClick={memoizedHandleClick}&gt;Click Me&lt;/SomeComponent&gt;;
+}</code></pre>
+<h3 id="6-useMemo"><a href="#6-useMemo" class="headerlink" title="6.useMemo"></a>6.useMemo</h3><blockquote>
+<p>记忆计算<br>参考链接：<a href="https://juejin.im/post/5dd337985188252a1873730f?utm_source=gold_browser_extension" target="_blank" rel="noopener">https://juejin.im/post/5dd337985188252a1873730f?utm_source=gold_browser_extension</a></p>
+</blockquote>
+<p>useCallback 的功能完全可以由 useMemo 所取代，如果你想通过使用 useMemo 返回一个记忆函数也是完全可以的。<br>useCallback(fn,inputs) &lt;==&gt; useMemo(()=&gt;fn,inputs);</p>
+<pre><code class="js">function App(){
+    const memoizedHandleClick = useMemo(() =&gt; () =&gt; {
+        console.log(&#39;click happened&#39;);
+    },[])// 空数组代表无论什么情况下该函数都不会发生改变
+    return &lt;SomeComponent onClick={memoizedHandleClick}&gt;Click Me&lt;/SomeComponent&gt;;
+}</code></pre>
+<p>useMemo 会执行第一个函数并且将函数执行结果返回给你<br>useMemo 更适合经过函数计算得到一个确定的值，比如记忆组件。</p>
+<pre><code class="js">import React, { useState, useMemo } from &quot;react&quot;;
+import ReactDOM from &quot;react-dom&quot;;
+
+const Counter = props =&gt; {
+  return &lt;div&gt;{props.count}&lt;/div&gt;;
+};
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  const changeCount = () =&gt; {
+    setCount(count + 1);
+  };
+
+  //useMemo 返回 经过函数计算得到一个确定的值
+  const dobuleCount = useMemo(() =&gt; count * 2, [count]);
+
+  //useMemo 返回 一个函数
+  const changeCount2 = useMemo(() =&gt; () =&gt; setCount(count + 1), [count]);
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;Counter count={count} /&gt;
+      &lt;div&gt;dobuleCount:{dobuleCount}&lt;/div&gt;
+      &lt;button onClick={changeCount}&gt;changeCount:{count}&lt;/button&gt;
+      &lt;button onClick={changeCount2}&gt;changeCount2:{count}&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+const rootElement = document.getElementById(&quot;root&quot;);
+ReactDOM.render(&lt;App /&gt;, rootElement);</code></pre>
+<pre><code class="js">import React, { useState, useMemo, memo, useCallback } from &quot;react&quot;;
+import ReactDOM from &quot;react-dom&quot;;
+
+const Counter = memo(props =&gt; {
+  console.log(&quot;counter render&quot;);
+  return &lt;div onClick={props.onClick}&gt;{props.count}&lt;/div&gt;;
+});
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  const changeCount = () =&gt; {
+    setCount(count + 1);
+  };
+
+  //useMemo 返回 经过函数计算得到一个确定的值
+  const dobuleCount = useMemo(() =&gt; count * 2, [count === 3]);
+
+  //useMemo 返回 一个函数
+  const changeCount2 = useMemo(() =&gt; () =&gt; setCount(count + 1), [count]);
+
+  //userMemo 返回一个 函数 同时传递给子组件，在子组件里面调用
+  // const onClick = useMemo(() =&gt; {
+  //   return () =&gt; {
+  //     console.log(&quot;click&quot;);
+  //   };
+  // }, []);
+
+  //等价于上面
+  // const onClick = useCallback(() =&gt; {
+  //   console.log(&quot;click&quot;);
+  // }, []);
+
+  const onClick = () =&gt; {
+    console.log(&quot;click&quot;);
+  };
+
+
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;Counter count={dobuleCount} onClick={onClick} /&gt;
+      &lt;div&gt;dobuleCount:{dobuleCount}&lt;/div&gt;
+      &lt;button onClick={changeCount}&gt;changeCount:{count}&lt;/button&gt;
+      &lt;button onClick={changeCount2}&gt;changeCount2:{count}&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+const rootElement = document.getElementById(&quot;root&quot;);
+ReactDOM.render(&lt;App /&gt;, rootElement);
+</code></pre>
+<blockquote>
+<p>总结，当需要通过属性给子组件传递函数（方法）时，这个方法就由useCallback或者useMemo来创建</p>
+</blockquote>
+<p>这个例子，每次点击按钮count都发生改变,在Counter组件中通过memo来优化，只有count改变才渲染。<br>但是由于我们同时也传递了方法给该组件，就会导致每次count改变 所获取的函数事件句柄重新生成了。<br>这就导致每次count改变 Counter重新生成事件，要避免就在外面传递函数时，通过useCallback或者useMemo来优化。</p>
+<pre><code class="js">const onClick = useCallback(() =&gt; {
+    console.log(&quot;click&quot;);
+}, []);
+
+const onClick = useMemo(() =&gt; {
+    return () =&gt; {
+    console.log(&quot;click&quot;);
+    };
+}, []);</code></pre>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/react/">react</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script type="text/javascript">
+    var notify = 'false' === 'true';
+    var verify = 'false' === 'true';
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "RVi2nheifsyLgdNUtOODWrEk-gzGzoHsz",
+        app_key: "IcQeTY6Y778SNjPL5dwy9JOs",
+        placeholder: "说点什么",
+        avatar: "/retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "React-hooks&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
+
+
+
+
+
+
+
+
+</body>
+</html>
