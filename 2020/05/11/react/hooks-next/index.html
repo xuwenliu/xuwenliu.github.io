@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="xu wen liu">
   <meta name="keywords" content="">
-  <title>React-hooks上 - NeverGiveUpT</title>
+  <title>React-hooks下 - NeverGiveUpT</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -136,7 +136,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  2020-05-10 17:10:00
+                  2020-05-11 20:30:00
                 </p>
               
 
@@ -145,7 +145,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    1.5k 字
+                    897 字
                   </span>
                 
 
@@ -153,7 +153,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      6 分钟
+                      4 分钟
                   </span>
                 
 
@@ -181,219 +181,173 @@
           <div class="post-content mx-auto" id="post">
             
               <p
-                class="note note-warning">本文最后更新于：2020-05-11 20:50:17</p>
+                class="note note-warning">本文最后更新于：2020-05-11 20:50:25</p>
             
             <div class="markdown-body">
-              <h3 id="1-useState"><a href="#1-useState" class="headerlink" title="1.useState"></a>1.useState</h3><p>这个就太简单了，不多做介绍</p>
-<h3 id="2-useEffect"><a href="#2-useEffect" class="headerlink" title="2.useEffect"></a>2.useEffect</h3><p>函数组件能保存状态，但是对于异步请求，副作用的操作还是无能为力，所以 React 提供了 useEffect 来帮助开发者处理函数组件的副作用</p>
-<pre><code class="js">import React, { useState, useEffect } from &quot;react&quot;;
+              <h3 id="1-useRef"><a href="#1-useRef" class="headerlink" title="1.useRef"></a>1.useRef</h3><blockquote>
+<p>保存引用值</p>
+</blockquote>
+<ul>
+<li>useRef 跟 createRef 类似，都可以用来生成对 DOM 对象的引用。</li>
+<li>useRef 返回的值传递给组件或者 DOM 的 ref 属性就可以通过 ref.current 值访问组件或真实的 DOM 节点，重点是组件也是可以访问到的，从而可以对 DOM 进行一些操作，比如监听事件等等。</li>
+<li>useRef 的功能有点像类属性，在组件中记录一些值，并且这些值在稍后可以更改</li>
+</ul>
+<pre><code class="js">import React, { useState, useRef } from &quot;react&quot;;
 import ReactDOM from &quot;react-dom&quot;;
-let timer = null;
+
+import &quot;./styles.css&quot;;
+
+function App() {
+  let [name, setName] = useState(&quot;init&quot;);
+
+  let nameRef = useRef();
+
+  //点击按钮把文本框里面的值赋给name
+  const submitButton = () =&gt; {
+    console.log(nameRef.current);
+    setName(nameRef.current.value);
+  };
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;p&gt;{name}&lt;/p&gt;
+      &lt;div&gt;
+        &lt;input ref={nameRef} type=&quot;text&quot; /&gt;
+        &lt;button type=&quot;button&quot; onClick={submitButton}&gt;
+          Submit
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+const rootElement = document.getElementById(&quot;root&quot;);
+ReactDOM.render(&lt;App /&gt;, rootElement);</code></pre>
+<pre><code class="js">import React, { useState, useEffect, useRef } from &quot;react&quot;;
+import ReactDOM from &quot;react-dom&quot;;
 
 function App() {
   const [count, setCount] = useState(0);
-  useEffect(() =&gt; {
-      document.title = &quot;componentDidMount&quot; + count;
-    },[count]);
+  const timer = useRef();
+
+  const changeCount = () =&gt; {
+    setCount(count + 1);
+  };
 
   useEffect(() =&gt; {
-    timer = setInterval(() =&gt; {
-      setCount(prevCount =&gt; prevCount + 1);
+    timer.current = setInterval(() =&gt; {
+      setCount(count =&gt; count + 1);
     }, 1000);
-    return () =&gt; {
-      document.title = &quot;componentWillUnmount&quot;;
-      clearInterval(timer);
-    };
   }, []);
+
+  useEffect(() =&gt; {
+    if (count &gt;= 10) {
+      clearInterval(timer.current);
+    }
+  });
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;button onClick={changeCount}&gt;changeCount:{count}&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+const rootElement = document.getElementById(&quot;root&quot;);
+ReactDOM.render(&lt;App /&gt;, rootElement);</code></pre>
+<h3 id="2-useImperativeHandle"><a href="#2-useImperativeHandle" class="headerlink" title="2.useImperativeHandle"></a>2.useImperativeHandle</h3><blockquote>
+<p>透传 Ref 用于让父组件获取子组件内的索引</p>
+</blockquote>
+<pre><code class="js">import React, { useRef, useEffect, useImperativeHandle, forwardRef } from &quot;react&quot;;
+function ChildInputComponent(props, ref) {
+  const inputRef = useRef(null);
+  useImperativeHandle(ref, () =&gt; inputRef.current);
+  return &lt;input type=&quot;text&quot; name=&quot;child input&quot; ref={inputRef} /&gt;;
+}
+const ChildInput = forwardRef(ChildInputComponent);
+function App() {
+  const inputRef = useRef(null);
+  useEffect(() =&gt; {
+    inputRef.current.focus();
+  }, []);
+  return (
+    &lt;div&gt;
+      &lt;ChildInput ref={inputRef} /&gt;
+    &lt;/div&gt;
+  );
+}
+//通过这种方式，App 组件可以获得子组件的 input 的 DOM 节点</code></pre>
+<h3 id="3-useLayoutEffect"><a href="#3-useLayoutEffect" class="headerlink" title="3.useLayoutEffect"></a>3.useLayoutEffect</h3><blockquote>
+<p>同步执行副作用</p>
+</blockquote>
+<ul>
+<li>大部分情况下，使用 useEffect 就可以帮我们处理组件的副作用，但是如果想要同步调用一些副作用，比如对 DOM 的操作，就需要使用 useLayoutEffect，</li>
+<li>useLayoutEffect 中的副作用会在 DOM 更新之后同步执行。</li>
+<li>useLayoutEffect 会在 render，DOM 更新之后同步触发函数，会优于 useEffect 异步触发函数。</li>
+<li>useLayoutEffect和原来componentDidMount&amp;componentDidUpdate一致，在react完成DOM更新后马上同步调用的代码，会阻塞页面渲染。<br>而useEffect是会在整个页面渲染完才会调用的代码。</li>
+<li>在实际使用时如果想避免页面抖动（在useEffect里修改DOM很有可能出现）的话，可以把需要操作DOM的代码放在useLayoutEffect里<br>不过useLayoutEffect在服务端渲染时会出现一个warning，要消除的话得用useEffect代替或者推迟渲染时机。</li>
+</ul>
+<pre><code class="js">import React, { useLayoutEffect, useState, useEffect } from &quot;react&quot;;
+import ReactDOM from &quot;react-dom&quot;;
+
+function App() {
+  const [width, setWidth] = useState(0);
+  useLayoutEffect(() =&gt; {
+    const title = document.querySelector(&quot;#title&quot;);
+    const titleWidth = title.getBoundingClientRect().width;
+    console.log(&quot;2-useLayoutEffect&quot;);
+    if (width !== titleWidth) {
+      setWidth(titleWidth);
+    }
+  },[width]);
+
+  useEffect(() =&gt; {
+    console.log(&quot;3-useEffect&quot;);
+  });
+
+  console.log(&quot;1-render&quot;);
 
   return (
     &lt;div&gt;
-      Count: {count}
-      &lt;button onClick={() =&gt; clearInterval(timer)}&gt;clear&lt;/button&gt;
+      &lt;h1 id=&quot;title&quot;&gt;hello&lt;/h1&gt;
+      &lt;h2&gt;{width}&lt;/h2&gt;
     &lt;/div&gt;
   );
 }
-const rootElement = document.getElementById(&quot;root&quot;);
-ReactDOM.render(&lt;App /&gt;, rootElement);</code></pre>
-<p>  1.第一个参数接收一个函数，可以用来做一些副作用比如异步请求，修改外部参数等行为<br>  2.第二个参数称之为dependencies，是一个数组，如果数组中的值变化才会触发 执行useEffect 第一个参数中的函数<br>  3.返回值(如果有)则在组件销毁或者调用函数前调用  用来代替componentWillUnmount<br>  4.第二个参数：</p>
-<ul>
-<li>不传递  代表不监听任何参数变化。每次渲染DOM之后，都会执行useEffect中的函数。</li>
-<li>传递空数组[] 这种情况下只有在组件初始化或销毁的时候才会触发，用来代替 componentDidMount 和 componentWillUnmount</li>
-<li>传递[count] 理解起来就是一旦 count 值发生改变，则修改 documen.title 值； 用来代替componentDidUpdate</li>
-</ul>
-<h3 id="3-模拟一个-componentDidUpdate"><a href="#3-模拟一个-componentDidUpdate" class="headerlink" title="3.模拟一个 componentDidUpdate"></a>3.模拟一个 componentDidUpdate</h3><pre><code class="js">function useUpdate(fn) {
-  // useRef 创建一个引用
-  const mounting = useRef(true);
-  useEffect(() =&gt; {
-    if (mounting.current) {
-      mounting.current = false;
-    } else {
-      fn();
-    }
-  });
-}</code></pre>
-<h3 id="4-useContext"><a href="#4-useContext" class="headerlink" title="4.useContext"></a>4.useContext</h3><blockquote>
-<p>跨组件传值（依赖createContext）<br>useContext用来处理多层级传递数据的方式，在以前组件树种，跨层级祖先组件想要给孙子组件传递数据的时候，除了一层层 props 往下透传之外，我们还可以使用 React Context API 来帮我们做这件事</p>
-</blockquote>
-<pre><code class="js">//1.从react中导入useContext和createContext
-import React, { useContext,createContext } from &quot;react&quot;;
-import ReactDOM from &quot;react-dom&quot;;
-
-const { Provider, Consumer } = createContext(null);
-
-//2.调用createContext 接受一个初始化参数
-const colorContext = createContext({
-  color: &quot;blue&quot;
-});
-
-function Bar() {
-  //3.把colorContext传递给useContext 返回值即是想要透传的数据了
-  //传递给 useContext 的是 context 而不是 consumer
-  const colors = useContext(colorContext);
-  return (
-    &lt;Consumer&gt;
-      {color =&gt; (
-        &lt;&gt;
-          &lt;div&gt;{color}&lt;/div&gt;
-          &lt;h2&gt;我是用useContext传过来的值 {colors.color}&lt;/h2&gt;
-        &lt;/&gt;
-      )}
-    &lt;/Consumer&gt;
-  );
-}
-
-function Foo() {
-  return &lt;Bar /&gt;;
-}
-
-function App() {
-  return (
-    &lt;Provider value={&quot;grey&quot;}&gt;
-      &lt;Foo /&gt;
-    &lt;/Provider&gt;
-  );
-}
 
 const rootElement = document.getElementById(&quot;root&quot;);
 ReactDOM.render(&lt;App /&gt;, rootElement);</code></pre>
-<h3 id="5-useCallback"><a href="#5-useCallback" class="headerlink" title="5.useCallback"></a>5.useCallback</h3><blockquote>
-<p>常用于记忆事件函数，生成记忆后的事件函数并传递给子组件使用<br>参考链接：<a href="https://juejin.im/post/5dd337985188252a1873730f?utm_source=gold_browser_extension" target="_blank" rel="noopener">https://juejin.im/post/5dd337985188252a1873730f?utm_source=gold_browser_extension</a></p>
+<h3 id="4-useReducer"><a href="#4-useReducer" class="headerlink" title="4.useReducer"></a>4.useReducer</h3><blockquote>
+<p>在使用上几乎跟 Redux/React-Redux 一模一样，唯一缺少的就是无法使用 redux 提供的中间件，算是提供一个 mini 的 Redux 版本。</p>
 </blockquote>
-<p>1.作用是：获得一个记忆后的函数<br>2.第一个参数接收一个函数，且不会执行第一个参数函数，而是将它返回给你<br>3.第二个参数传入一个数组，数组中的每一项一旦值或者引用发生改变，useCallback 就会重新返回一个新的记忆函数提供给后面进行渲染。<br>4.这样只要子组件继承了 PureComponent 或者使用 React.memo 就可以有效避免不必要的 VDOM 渲染。</p>
-<pre><code class="js">function App() {
-  const memoizedHandleClick = useCallback(() =&gt; {
-    console.log(&#39;Click happened&#39;)
-  }, []); // 空数组代表无论什么情况下该函数都不会发生改变
-  return &lt;SomeComponent onClick={memoizedHandleClick}&gt;Click Me&lt;/SomeComponent&gt;;
-}</code></pre>
-<h3 id="6-useMemo"><a href="#6-useMemo" class="headerlink" title="6.useMemo"></a>6.useMemo</h3><blockquote>
-<p>记忆计算<br>参考链接：<a href="https://juejin.im/post/5dd337985188252a1873730f?utm_source=gold_browser_extension" target="_blank" rel="noopener">https://juejin.im/post/5dd337985188252a1873730f?utm_source=gold_browser_extension</a></p>
-</blockquote>
-<p>useCallback 的功能完全可以由 useMemo 所取代，如果你想通过使用 useMemo 返回一个记忆函数也是完全可以的。<br>useCallback(fn,inputs) &lt;==&gt; useMemo(()=&gt;fn,inputs);</p>
-<pre><code class="js">function App(){
-    const memoizedHandleClick = useMemo(() =&gt; () =&gt; {
-        console.log(&#39;click happened&#39;);
-    },[])// 空数组代表无论什么情况下该函数都不会发生改变
-    return &lt;SomeComponent onClick={memoizedHandleClick}&gt;Click Me&lt;/SomeComponent&gt;;
-}</code></pre>
-<p>useMemo 会执行第一个函数并且将函数执行结果返回给你<br>useMemo 更适合经过函数计算得到一个确定的值，比如记忆组件。</p>
-<pre><code class="js">import React, { useState, useMemo } from &quot;react&quot;;
-import ReactDOM from &quot;react-dom&quot;;
-
-const Counter = props =&gt; {
-  return &lt;div&gt;{props.count}&lt;/div&gt;;
+<pre><code class="js">import React, { useReducer } from &quot;react&quot;;
+const initialState = {
+  count: 0
 };
-
-function App() {
-  const [count, setCount] = useState(0);
-
-  const changeCount = () =&gt; {
-    setCount(count + 1);
-  };
-
-  //useMemo 返回 经过函数计算得到一个确定的值
-  const dobuleCount = useMemo(() =&gt; count * 2, [count]);
-
-  //useMemo 返回 一个函数
-  const changeCount2 = useMemo(() =&gt; () =&gt; setCount(count + 1), [count]);
-
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;Counter count={count} /&gt;
-      &lt;div&gt;dobuleCount:{dobuleCount}&lt;/div&gt;
-      &lt;button onClick={changeCount}&gt;changeCount:{count}&lt;/button&gt;
-      &lt;button onClick={changeCount2}&gt;changeCount2:{count}&lt;/button&gt;
-    &lt;/div&gt;
-  );
+function reducer(state, action) {
+  switch (action.type) {
+    case &quot;add&quot;:
+      return { count: state.count + action.payload };
+    case &quot;reduce&quot;:
+      return { count: state.count - action.payload };
+    default:
+      throw new Error();
+  }
 }
-
-const rootElement = document.getElementById(&quot;root&quot;);
-ReactDOM.render(&lt;App /&gt;, rootElement);</code></pre>
-<pre><code class="js">import React, { useState, useMemo, memo, useCallback } from &quot;react&quot;;
-import ReactDOM from &quot;react-dom&quot;;
-
-const Counter = memo(props =&gt; {
-  console.log(&quot;counter render&quot;);
-  return &lt;div onClick={props.onClick}&gt;{props.count}&lt;/div&gt;;
-});
-
 function App() {
-  const [count, setCount] = useState(0);
-
-  const changeCount = () =&gt; {
-    setCount(count + 1);
-  };
-
-  //useMemo 返回 经过函数计算得到一个确定的值
-  const dobuleCount = useMemo(() =&gt; count * 2, [count === 3]);
-
-  //useMemo 返回 一个函数
-  const changeCount2 = useMemo(() =&gt; () =&gt; setCount(count + 1), [count]);
-
-  //userMemo 返回一个 函数 同时传递给子组件，在子组件里面调用
-  // const onClick = useMemo(() =&gt; {
-  //   return () =&gt; {
-  //     console.log(&quot;click&quot;);
-  //   };
-  // }, []);
-
-  //等价于上面
-  // const onClick = useCallback(() =&gt; {
-  //   console.log(&quot;click&quot;);
-  // }, []);
-
-  const onClick = () =&gt; {
-    console.log(&quot;click&quot;);
-  };
-
-
-
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;Counter count={dobuleCount} onClick={onClick} /&gt;
-      &lt;div&gt;dobuleCount:{dobuleCount}&lt;/div&gt;
-      &lt;button onClick={changeCount}&gt;changeCount:{count}&lt;/button&gt;
-      &lt;button onClick={changeCount2}&gt;changeCount2:{count}&lt;/button&gt;
-    &lt;/div&gt;
+    &lt;&gt;
+      Count: {state.count}
+      &lt;button onClick={() =&gt; dispatch({ type: &quot;add&quot;, payload: 1 })}&gt;
+        +
+      &lt;/button&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: &quot;reduce&quot;, payload: 1 })}&gt;
+        -
+      &lt;/button&gt;
+    &lt;/&gt;
   );
-}
-
-const rootElement = document.getElementById(&quot;root&quot;);
-ReactDOM.render(&lt;App /&gt;, rootElement);
-</code></pre>
-<blockquote>
-<p>总结，当需要通过属性给子组件传递函数（方法）时，这个方法就由useCallback或者useMemo来创建</p>
-</blockquote>
-<p>这个例子，每次点击按钮count都发生改变,在Counter组件中通过memo来优化，只有count改变才渲染。<br>但是由于我们同时也传递了方法给该组件，就会导致每次count改变 所获取的函数事件句柄重新生成了。<br>这就导致每次count改变 Counter重新生成事件，要避免就在外面传递函数时，通过useCallback或者useMemo来优化。</p>
-<pre><code class="js">const onClick = useCallback(() =&gt; {
-    console.log(&quot;click&quot;);
-}, []);
-
-const onClick = useMemo(() =&gt; {
-    return () =&gt; {
-    console.log(&quot;click&quot;);
-    };
-}, []);</code></pre>
+}</code></pre>
 
             </div>
             <hr>
@@ -617,7 +571,7 @@ const onClick = useMemo(() =&gt; {
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "React-hooks上&nbsp;",
+        "React-hooks下&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
