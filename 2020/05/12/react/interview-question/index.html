@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="xu wen liu">
+  <meta name="keywords" content="">
+  <title>React面试题集锦 - NeverGiveUpT</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>NeverGiveUpT</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">友链</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  2020-05-12 20:19:00
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    2.3k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      9 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p
+                class="note note-warning">本文最后更新于：2020-05-12 21:05:36</p>
+            
+            <div class="markdown-body">
+              <p>持续更新~~</p>
+<h3 id="1-redux中间件的原理是什么？"><a href="#1-redux中间件的原理是什么？" class="headerlink" title="1.redux中间件的原理是什么？"></a>1.redux中间件的原理是什么？</h3><blockquote>
+<p>中间件是指action和store之间，用来改装dispatch<br>原来的action是一个对象，那么通过redux-thunk这个中间件就可以将action改装成一个函数然后返回一个对象。</p>
+</blockquote>
+<p><img src="/img/react/redux.jpg" srcset="/img/loading.gif" alt="redux"></p>
+<h3 id="2-你会把数据统一放到redux中管理，还是共享数据放在redux中管理？"><a href="#2-你会把数据统一放到redux中管理，还是共享数据放在redux中管理？" class="headerlink" title="2.你会把数据统一放到redux中管理，还是共享数据放在redux中管理？"></a>2.你会把数据统一放到redux中管理，还是共享数据放在redux中管理？</h3><p>应当是所有的数据都放到redux中管理。<br>在react中存储数据有state，props，redux这三种方式。如果部分放在redux，部分放在state或者props里面，那么对于数据的维护和出现问题的排查是不利的。</p>
+<h3 id="3-componentWillReceiveProps的调用时机？-已废弃"><a href="#3-componentWillReceiveProps的调用时机？-已废弃" class="headerlink" title="3.componentWillReceiveProps的调用时机？ 已废弃"></a>3.componentWillReceiveProps的调用时机？ <code>已废弃</code></h3><p>当props发生变化时执行，初始化render时不执行</p>
+<h3 id="4-react性能优化的最佳实践？"><a href="#4-react性能优化的最佳实践？" class="headerlink" title="4.react性能优化的最佳实践？"></a>4.react性能优化的最佳实践？</h3><ul>
+<li>减少重新render的次数  —shouldComponentUpdate/PureComponent</li>
+<li>减少计算量，主要是减少重复计算。对于函数式组件来说，每次render都会重新从头开始执行函数调用 —React.memo</li>
+</ul>
+<h3 id="5-虚拟dom是什么？为什么虚拟dom会提升性能？"><a href="#5-虚拟dom是什么？为什么虚拟dom会提升性能？" class="headerlink" title="5.虚拟dom是什么？为什么虚拟dom会提升性能？"></a>5.虚拟dom是什么？为什么虚拟dom会提升性能？</h3><blockquote>
+<p>虚拟dom就是一个js对象。<br>react通过数据改变来比对前后虚拟dom之间的差异，然后用实际更改的内容更新真实dom。</p>
+</blockquote>
+<h3 id="6-webpack中，-是借助loader完成的JSX代码的转化，还是babel"><a href="#6-webpack中，-是借助loader完成的JSX代码的转化，还是babel" class="headerlink" title="6.webpack中， 是借助loader完成的JSX代码的转化，还是babel?"></a>6.webpack中， 是借助loader完成的JSX代码的转化，还是babel?</h3><p>babel — preset-react</p>
+<h3 id="7-调用setState后，发生了什么？setState一般怎么用，传一个对象还是函数？"><a href="#7-调用setState后，发生了什么？setState一般怎么用，传一个对象还是函数？" class="headerlink" title="7.调用setState后，发生了什么？setState一般怎么用，传一个对象还是函数？"></a>7.调用setState后，发生了什么？setState一般怎么用，传一个对象还是函数？</h3><p>在代码中调用了setState之后，React会将传入的参数对象与组件当前的状态合并，然后触发调和过程，经过调和过程，react会以相对高效的方式根据新的状态构建react元素树并开始重新渲染UI界面。在得到元素树之后，会自动计算新的树与老的树的节点差异，然后根据差异对界面进行最小化重渲染。在差异计算中，react能够相对精确的知道哪些位置发生了改变以及应该如何改变，这就保证了按需更新，而不是全部重新渲染。<br>官方推荐：</p>
+<pre><code class="js">this.setState((preState) =&gt; ({
+    name:&#39;newValue&#39;
+}))</code></pre>
+<h3 id="8-setState是异步的，这个点你在什么时候遇到过坑？"><a href="#8-setState是异步的，这个点你在什么时候遇到过坑？" class="headerlink" title="8.setState是异步的，这个点你在什么时候遇到过坑？"></a>8.setState是异步的，这个点你在什么时候遇到过坑？</h3><p>一般是在调用this.setState()之后访问修改的值，取到的还是之前的结果，并不是更新后的。<br>若要访问更新后的需要在第二个回调函数里面访问出来</p>
+<pre><code class="js">this.setState((preState)=&gt;({
+    name:&#39;xxx&#39;
+}),()=&gt;{
+    console.log(this.state.name);
+}）</code></pre>
+<h3 id="9-refs的作用是什么，你在什么业务场景下使用过refs"><a href="#9-refs的作用是什么，你在什么业务场景下使用过refs" class="headerlink" title="9.refs的作用是什么，你在什么业务场景下使用过refs?"></a>9.refs的作用是什么，你在什么业务场景下使用过refs?</h3><ul>
+<li>操作dom，比如渲染图片后，需要获取图片的宽高。需要管理焦点，文本选择或者媒体播放，触发强制动画，集成第三方DOM库</li>
+<li>操作组件，向组件添加属性或方法</li>
+</ul>
+<h3 id="10-ref是一个函数，有什么好处？"><a href="#10-ref是一个函数，有什么好处？" class="headerlink" title="10.ref是一个函数，有什么好处？"></a>10.ref是一个函数，有什么好处？</h3><ul>
+<li>react可以更优雅的完成对组件/元素销毁时的变量回收，你只要这么用，react在销毁组件时，很方便的就可以被清理变为null。</li>
+<li>可以做更多的操作，例如：让父组件直接获取子组件的Dom，而如果你让ref是一个字符串，实现这个功能是不可能的<pre><code class="js">function CustomTextInput(props) {
+return (
+  &lt;div&gt;
+    &lt;input ref={props.inputRef} /&gt;
+  &lt;/div&gt;
+);
+}
+class Parent extends React.Component {
+render() {
+  return (
+    &lt;CustomTextInput
+      inputRef={el =&gt; this.inputElement = el}
+    /&gt;
+  );
+}
+}</code></pre>
+</li>
+</ul>
+<h3 id="11-高阶组件HOC你是怎么理解的，它的本质是一个什么东西？"><a href="#11-高阶组件HOC你是怎么理解的，它的本质是一个什么东西？" class="headerlink" title="11.高阶组件HOC你是怎么理解的，它的本质是一个什么东西？"></a>11.高阶组件HOC你是怎么理解的，它的本质是一个什么东西？</h3><blockquote>
+<p>高阶组件是一个以组件为参数并返回一个新组件的函数。<br>最常见的可能是 Redux 的 connect 函数</p>
+</blockquote>
+<ul>
+<li>代码重用，逻辑和引导抽象</li>
+<li>渲染劫持</li>
+<li>状态抽象和控制</li>
+<li>Props 控制</li>
+</ul>
+<h3 id="12-受控组件和非受控组件的区别？"><a href="#12-受控组件和非受控组件的区别？" class="headerlink" title="12.受控组件和非受控组件的区别？"></a>12.受控组件和非受控组件的区别？</h3><p>受控组件：这个组件的改变受控于数据的变化，数据变了，页面跟着变化。例如：</p>
+<pre><code class="js">class Demo1 extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: props.value
+        }
+    }
+
+    handleChange(e) {
+        this.setState({
+            value: e.target.value
+        })
+    }
+
+    render() {
+        return (
+            &lt;input value={this.state.value} onChange={e =&gt; this.handleChange(e)}/&gt;
+        )
+    }
+}</code></pre>
+<p>非受控组件：组件的状态不受react控制</p>
+<pre><code class="js">class Demo1 extends Component {
+    render() {
+        return (
+            &lt;input /&gt;
+        )
+    }
+}</code></pre>
+<h3 id="13-this指向问题你一般是怎么解决的？"><a href="#13-this指向问题你一般是怎么解决的？" class="headerlink" title="13.this指向问题你一般是怎么解决的？"></a>13.this指向问题你一般是怎么解决的？</h3><ul>
+<li>箭头函数</li>
+<li>bind this放在constructor里面</li>
+</ul>
+<h3 id="14-函数组件怎么做性能优化？"><a href="#14-函数组件怎么做性能优化？" class="headerlink" title="14.函数组件怎么做性能优化？"></a>14.函数组件怎么做性能优化？</h3><p>用React.memo包装函数组件，类似于类组件的shouldComponentUpdate</p>
+<h3 id="15-那个生命周期里发送ajax"><a href="#15-那个生命周期里发送ajax" class="headerlink" title="15.那个生命周期里发送ajax?"></a>15.那个生命周期里发送ajax?</h3><blockquote>
+<p>componentDidMount<br>这个方法会在组件第一次“挂载”(被添加到 DOM)时执行，在组件的生命周期中仅会执行一次。更重要的是，你不能保证在组件挂载之前 Ajax 请求已经完成，如果是这样，也就意味着你将尝试在一个未挂载的组件上调用 setState，这将不起作用。在 componentDidMount 中发起网络请求将保证这有一个组件可以更新了。</p>
+</blockquote>
+<h3 id="16-react-的ssr的原理是什么？"><a href="#16-react-的ssr的原理是什么？" class="headerlink" title="16.react 的ssr的原理是什么？"></a>16.react 的ssr的原理是什么？</h3><blockquote>
+<p>借助虚拟dom完成操作</p>
+</blockquote>
+<h3 id="17-react-jquery-vue是否有可能共存在一个项目中？"><a href="#17-react-jquery-vue是否有可能共存在一个项目中？" class="headerlink" title="17.react,jquery,vue是否有可能共存在一个项目中？"></a>17.react,jquery,vue是否有可能共存在一个项目中？</h3><p>可以，怎么共存？</p>
+<pre><code class="html">&lt;body&gt;
+    &lt;div id=&quot;jquery&quot;&gt;&lt;/div&gt;    //这个div用于jquery操作
+    &lt;div id=&quot;react&quot;&gt;&lt;/div&gt;        //这个用于react
+     &lt;div id=&quot;vue&quot;&gt;&lt;/div&gt;        //这个用于vue
+ &lt;/body&gt;
+&lt;script&gt;
+    ReactDom.render(&lt;App /&gt;,document.getElementById(&#39;react&#39;));
+    let vue = new Vue({
+        el:&quot;#vue&quot;,
+        data(){
+            return {
+
+            }
+        }
+    })
+&lt;/script&gt;</code></pre>
+<h3 id="18-组件是什么？类是什么？类被编译成什么？"><a href="#18-组件是什么？类是什么？类被编译成什么？" class="headerlink" title="18.组件是什么？类是什么？类被编译成什么？"></a>18.组件是什么？类是什么？类被编译成什么？</h3><p>组件：指的是页面的一部分<br>类：本质就是一个构造函数<br>被编译为：构造函数</p>
+<h3 id="19-如何避免ajax数据重新获取"><a href="#19-如何避免ajax数据重新获取" class="headerlink" title="19.如何避免ajax数据重新获取"></a>19.如何避免ajax数据重新获取</h3><p>数据采用redux和react-redux来管理</p>
+<h3 id="20-react-router4的核心思想是什么？和3有什么区别"><a href="#20-react-router4的核心思想是什么？和3有什么区别" class="headerlink" title="20.react-router4的核心思想是什么？和3有什么区别"></a>20.react-router4的核心思想是什么？和3有什么区别</h3><p>核心思想是：路由也是组件 <Link></Link> <Route></Route><br>3是路由配置，4是路由即组件</p>
+<h3 id="21-reselect是做什么使用的？"><a href="#21-reselect是做什么使用的？" class="headerlink" title="21.reselect是做什么使用的？"></a>21.reselect是做什么使用的？</h3><p>这个库类似于vue的computed</p>
+<h3 id="22-react-router的基本原理，hashHistory-browserHistory"><a href="#22-react-router的基本原理，hashHistory-browserHistory" class="headerlink" title="22.react-router的基本原理，hashHistory,browserHistory"></a>22.react-router的基本原理，hashHistory,browserHistory</h3><ul>
+<li>hashHistory 前端直接搞定</li>
+<li>browserHistory 需要后台在服务器进行配置</li>
+</ul>
+<h3 id="23-什么情况下使用异步组件"><a href="#23-什么情况下使用异步组件" class="headerlink" title="23.什么情况下使用异步组件"></a>23.什么情况下使用异步组件</h3><p>reloadable库，路由懒加载或者叫按需加载</p>
+<h3 id="24-xss攻击在react中如何防范？"><a href="#24-xss攻击在react中如何防范？" class="headerlink" title="24.xss攻击在react中如何防范？"></a>24.xss攻击在react中如何防范？</h3><p>react默认防范，我们慎用dangerouslySetInnerHTML</p>
+<pre><code class="js">export default class TodoInput extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            title:&#39;&lt;h1&gt;解析html&lt;/h2&gt;&#39;
+        }
+    }
+    render(){
+        return(
+            &lt;Fragment&gt;
+                &lt;div dangerouslySetInnerHTML = {{__html:this.state.title}}&gt;&lt;/div&gt;
+            &lt;/Fragment&gt;
+        )
+    }
+}</code></pre>
+<h3 id="25-react中keys的作用是什么？"><a href="#25-react中keys的作用是什么？" class="headerlink" title="25.react中keys的作用是什么？"></a>25.react中keys的作用是什么？</h3><blockquote>
+<p>Keys 是 React 用于追踪哪些列表中元素被修改、被添加或者被移除的辅助标识。</p>
+</blockquote>
+<pre><code class="js">render () {
+  return (
+    &lt;ul&gt;
+      {this.state.list.map(({item, key}) =&gt; {
+        return &lt;li key={key}&gt;{item}&lt;/li&gt;
+      })}
+    &lt;/ul&gt;
+  )
+}</code></pre>
+<p>在开发过程中，我们需要保证某个元素的 key 在其同级元素中具有唯一性。在 React Diff 算法中 React 会借助元素的 Key 值来判断该元素是新创建的还是被移动而来的元素，从而减少不必要的元素重渲染。此外，React 还需要借助<code>Key</code>值来判断元素与本地状态的关联关系，因此我们绝不可忽视转换函数中 Key 的重要性。</p>
+<h3 id="26-生命周期函数"><a href="#26-生命周期函数" class="headerlink" title="26.生命周期函数"></a>26.生命周期函数</h3><p>1.初始化阶段：</p>
+<ul>
+<li><code>getDefaultProps</code>:获取实例的默认属性 <code>已废弃</code></li>
+<li><code>getInitialState</code>:获取每个实例的初始化状态  <code>已废弃</code></li>
+<li><code>componentWillMount</code>：组件即将被装载、渲染到页面上  <code>已废弃</code></li>
+<li><code>render</code>:组件在这里生成虚拟的 DOM 节点</li>
+<li><code>componentDidMount</code>:组件真正在被装载之后</li>
+</ul>
+<p>2.运行中状态：</p>
+<ul>
+<li><p><code>componentWillReceiveProps</code>:组件将要接收到属性的时候调用    <code>已废弃</code></p>
+</li>
+<li><p><code>static getDerivedStateFromProps()</code></p>
+<blockquote>
+<p>是一个静态方法</p>
+</blockquote>
+<ul>
+<li>从props中获取衍生的state   </li>
+<li>它必须返回一个对象用于更新state,返回null则不更新任何内容</li>
+<li>没有this</li>
+<li>会在调用render之前调用，并且在初始挂载和后续更新中都会被调用。</li>
+</ul>
+</li>
+<li><p><code>shouldComponentUpdate(nextProps, nextState)</code>:组件接受到新属性或者新状态的时候（可以返回 <code>false</code>，接收数据后不更新，阻止 render 调用，后面的函数不会被继续执行了）</p>
+<ul>
+<li>当props和state发生改变时，shouldComponentUpdate会在渲染之前被调用。返回值默认为<code>true</code></li>
+<li>首次渲染和调用<code>forceUpdate()</code>时不会调用该方法。</li>
+<li><code>shouldComponentUpdat</code>e 只作为性能优化而存在。PureComponent 会对props和state进行浅层比较，不要用JSON.stringify()进行比较</li>
+<li>返回 <code>false</code> 不会调用<code>render()</code> <code>componentDidUpdate()</code> 并不会阻止子组件在state更改时重新渲染</li>
+</ul>
+</li>
+<li><p><code>componentWillUpdate</code>:组件即将更新不能修改属性和状态  <code>已废弃</code></p>
+</li>
+<li><p><code>render</code>:组件重新描绘 </p>
+</li>
+<li><p><code>componentDidUpdate(prevProps,prevState,snapshot)</code>:组件已经更新</p>
+<blockquote>
+<p><a href="https://zh-hans.reactjs.org/docs/react-component.html#componentdidupdate" target="_blank" rel="noopener">https://zh-hans.reactjs.org/docs/react-component.html#componentdidupdate</a></p>
+</blockquote>
+<ul>
+<li><p><code>componentDidUpdate</code>会在更新后立即被调用，首次渲染不会调用</p>
+</li>
+<li><p>当组件更新后，可以在此次对DOM进行操作。如果对前后props进行了比较，也可以进行网络请求</p>
+<pre><code class="js">  componentDidUpdate(prevProps) {
+      // 典型用法（不要忘记比较 props）：
+      if (this.props.userID !== prevProps.userID) {
+          this.fetchData(this.props.userID);
+      }
+  }</code></pre>
+</li>
+<li><p>也可以在<code>componentDidUpdate</code>中调用<code>setState()</code>,但他必须要被包含在条件判断语句内，否则会导致死循环</p>
+</li>
+<li><p>第三个参数如果<code>getSnapshotBeforeUpdate</code>未返回则是 <code>undefined</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>3.销毁阶段：</p>
+<ul>
+<li><code>componentWillUnmount</code>:组件即将销毁<ul>
+<li><code>componentWillUnmount</code> 会在组件销毁之前调用。在此方法中执行必要的清理操作。（例如：清除定时器，取消网络请求，解除绑定事件，…）</li>
+<li>不应该使用setState,因为组件将永远不会被渲染。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/img/react/lifecycle.jpg" srcset="/img/loading.gif" alt="react生命周期"></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/react/">react</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script type="text/javascript">
+    var notify = 'false' === 'true';
+    var verify = 'false' === 'true';
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "RVi2nheifsyLgdNUtOODWrEk-gzGzoHsz",
+        app_key: "IcQeTY6Y778SNjPL5dwy9JOs",
+        placeholder: "说点什么",
+        avatar: "/retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "React面试题集锦&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
+
+
+
+
+
+
+
+
+</body>
+</html>
