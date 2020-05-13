@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>JavaScript 浏览器新开窗口的正确方式</title>
+    <link href="/2020/05/13/js/opener/"/>
+    <url>/2020/05/13/js/opener/</url>
+    
+    <content type="html"><![CDATA[<p>前端项目开发过程中，网页里的a标签默认在当前窗口跳转链接地址，如果需要在新窗口打开，需要给 a 标签添加一个<code>target=&quot;_blank&quot;</code>属性。 例：</p><pre><code class="js">&lt;a target=&quot;_blank&quot; href=&quot;https://weibo.com/&quot;&gt;打开微博页面&lt;/a&gt;</code></pre><h3 id="1-此操作有安全问题"><a href="#1-此操作有安全问题" class="headerlink" title="1.此操作有安全问题"></a>1.此操作有安全问题</h3><p>如果只是加上 <code>target=“_blank&#39;</code>，在打开新窗口之后，新页面可以通过 <code>window.opener</code> 来获取到来源页面的 <code>window</code> 对象，即使是跨域状态也一样。</p><p><img src="/img/life/opener.png" srcset="/img/loading.gif" alt="opener"></p><p>某些属性的访问被拦截，是因为跨域安全策略的限制。但是，如果我修改 <code>window.opener.location</code> 的值，指向另外一个地址。即可以造成刚刚还在某个网站浏览，随后点击链接新开的窗口，但是这个新开的窗口在神不知鬼不觉的情况下，把原来的网页地址改了，再通过页面伪装，例如伪装成登录页等，来让用户输入账号密码登录，从而达到黑客不可告人的目的。</p><h3 id="2-此操作有性能问题"><a href="#2-此操作有性能问题" class="headerlink" title="2.此操作有性能问题"></a>2.此操作有性能问题</h3><p>通过 <code>target=&quot;_blank&quot;</code> 打开的新窗口，跟原来的页面窗口共用一个进程。如果这个新页面执行了一大堆性能不好的 JavaScript 代码，占用了大量系统资源，那你原来的页面的性能也会收到影响。</p><h3 id="3-解决办法"><a href="#3-解决办法" class="headerlink" title="3.解决办法"></a>3.解决办法</h3><p>1.尽量不使用  <code>target=&quot;_blank&quot;</code><br>2.如果一定要用，需要加上 <code>rel=”noopener“</code> 或者 <code>rel=“noreferrer”</code> ,这样新开窗口的  <code>window.openne</code>r 就为<code>null</code>，而且会让新窗口运行在独立的进程里，不会拖累原来页面的进程。(不过，有些浏览器对性能做了优化，即使不加这个属性，新窗口也会在独立进程打开。不过为了安全考虑，还是加上吧。)</p><p>下图是vscode的安全提示:<br><img src="/img/life/vscode-tip.png" srcset="/img/loading.gif" alt="tip"></p><p>3.通过 <code>window.open</code> 的方式打开新页面</p><pre><code class="js">let newWindow = window.open();newWindow.opener = null;newWindow.location = &quot;https://baidu.com/&quot;;newWindow.target = &quot;_blank&quot;;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>JS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>养生之喝点什么</title>
+    <link href="/2020/05/13/life/health/"/>
+    <url>/2020/05/13/life/health/</url>
+    
+    <content type="html"><![CDATA[<h3 id="养生之枸杞篇"><a href="#养生之枸杞篇" class="headerlink" title="养生之枸杞篇"></a>养生之枸杞篇</h3><p>枸杞+</p><ul><li>桂圆-安神入睡</li><li>红枣-健脾、护胃、养肝</li><li>黄芪[qi]-补肾、益精</li><li>菊花-养肝、排毒</li><li>山药-降血压、降血糖</li><li>斗龙芝-补肾、提高身体活力</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>生活</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>养生</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>React面试题集锦</title>
     <link href="/2020/05/12/react/interview-question/"/>
     <url>/2020/05/12/react/interview-question/</url>
