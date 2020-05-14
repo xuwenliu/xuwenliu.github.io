@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>小程序UI库-colorUI</title>
+    <link href="/2020/05/14/miniprogram/colorui/"/>
+    <url>/2020/05/14/miniprogram/colorui/</url>
+    
+    <content type="html"><![CDATA[<h2 id="ColorUI是一个css库"><a href="#ColorUI是一个css库" class="headerlink" title="ColorUI是一个css库"></a>ColorUI是一个css库</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p><a href="https://www.color-ui.com/" target="_blank" rel="noopener">https://www.color-ui.com/</a></p><h3 id="使用UniApp开发"><a href="#使用UniApp开发" class="headerlink" title="使用UniApp开发"></a>使用UniApp开发</h3><p>下载源码解压获得/Colorui-UniApp文件夹，复制目录下的 /colorui 文件夹到你的项目根目录<br>App.vue 引入关键Css main.css icon.css</p><pre><code class="css">&lt;style&gt;@import &quot;colorui/main.css&quot;;@import &quot;colorui/icon.css&quot;;@import &quot;app.css&quot;; /* 你的项目css */....&lt;/style&gt;</code></pre><h3 id="使用自定义导航栏"><a href="#使用自定义导航栏" class="headerlink" title="使用自定义导航栏"></a>使用自定义导航栏</h3><p>导航栏作为常用组件有做简单封装，当然你也可以直接复制代码结构自己修改，达到个性化目的。<br>App.vue 获得系统信息</p><pre><code class="js">onLaunch: function() {    uni.getSystemInfo({        success: function(e) {            // #ifndef MP            Vue.prototype.StatusBar = e.statusBarHeight;            if (e.platform == &#39;android&#39;) {                Vue.prototype.CustomBar = e.statusBarHeight + 50;            } else {                Vue.prototype.CustomBar = e.statusBarHeight + 45;            };            // #endif            // #ifdef MP-WEIXIN            Vue.prototype.StatusBar = e.statusBarHeight;            let custom = wx.getMenuButtonBoundingClientRect();            Vue.prototype.Custom = custom;            Vue.prototype.CustomBar = custom.bottom + custom.top - e.statusBarHeight;            // #endif                    // #ifdef MP-ALIPAY            Vue.prototype.StatusBar = e.statusBarHeight;            Vue.prototype.CustomBar = e.statusBarHeight + e.titleBarHeight;            // #endif        }    })},</code></pre><p>pages.json 配置取消系统导航栏</p><pre><code class="json">&quot;globalStyle&quot;: {    &quot;navigationStyle&quot;: &quot;custom&quot;},</code></pre><p>复制代码结构可以直接使用，注意全局变量的获取。</p><p>使用封装,在main.js 引入 cu-custom 组件。</p><pre><code class="js">import cuCustom from &#39;./colorui/components/cu-custom.vue&#39;Vue.component(&#39;cu-custom&#39;,cuCustom)</code></pre><p>page.vue 页面可以直接调用了</p><pre><code class="html">&lt;cu-custom bgColor=&quot;bg-gradual-blue&quot; :isBack=&quot;true&quot;&gt;    &lt;block slot=&quot;backText&quot;&gt;返回&lt;/block&gt;    &lt;block slot=&quot;content&quot;&gt;导航栏&lt;/block&gt;&lt;/cu-custom&gt;</code></pre><table><thead><tr><th>参数</th><th align="right">作用</th><th align="right">类型</th><th align="center">默认值</th></tr></thead><tbody><tr><td>bgColor</td><td align="right">背景颜色类名</td><td align="right">String</td><td align="center">‘’</td></tr><tr><td>isBack</td><td align="right">是否开启返回</td><td align="right">Boolean</td><td align="center">false</td></tr><tr><td>bgImage</td><td align="right">背景图片路径</td><td align="right">String</td><td align="center">‘’</td></tr></tbody></table><table><thead><tr><th>slot块</th><th align="right">作用</th></tr></thead><tbody><tr><td>backText</td><td align="right">返回时的文字</td></tr><tr><td>content</td><td align="right">中间区域</td></tr><tr><td>right</td><td align="right">右侧区域(小程序端可使用范围很窄！)</td></tr></tbody></table><h3 id="使用原生小程序开发"><a href="#使用原生小程序开发" class="headerlink" title="使用原生小程序开发"></a>使用原生小程序开发</h3><ul><li>从现有项目开始<br>下载源码解压获得/demo，复制目录下的 /colorui 文件夹到你的项目根目录</li></ul><p>App.wxss 引入关键Css main.wxss icon.wxss</p><pre><code class="css">@import &quot;colorui/main.wxss&quot;;@import &quot;colorui/icon.wxss&quot;;@import &quot;app.css&quot;; /* 你的项目css */....</code></pre><ul><li>从新项目开始<br>下载源码解压获得/template，复制/template并重命名为你的项目，导入到小程序开发工具既可以开始你的新项目了</li></ul><h4 id="使用自定义导航栏-1"><a href="#使用自定义导航栏-1" class="headerlink" title="使用自定义导航栏"></a>使用自定义导航栏</h4><p>导航栏作为常用组件有做简单封装，当然你也可以直接复制代码结构自己修改，达到个性化目的。<br>App.js 获得系统信息</p><pre><code class="js"> onLaunch: function() {    wx.getSystemInfo({      success: e =&gt; {        this.globalData.StatusBar = e.statusBarHeight;        let custom = wx.getMenuButtonBoundingClientRect();        this.globalData.Custom = custom;          this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;      }    })},</code></pre><p>App.json 配置取消系统导航栏,并全局引入组件</p><pre><code class="json">&quot;window&quot;: {    &quot;navigationStyle&quot;: &quot;custom&quot;},&quot;usingComponents&quot;: {    &quot;cu-custom&quot;:&quot;/colorui/components/cu-custom&quot;}</code></pre><p>page.wxml 页面可以直接调用了</p><pre><code class="html">&lt;cu-custom bgColor=&quot;bg-gradual-pink&quot; isBack=&quot;{{true}}&quot;&gt;    &lt;view slot=&quot;backText&quot;&gt;返回&lt;/view&gt;    &lt;view slot=&quot;content&quot;&gt;导航栏&lt;/view&gt;&lt;/cu-custom&gt;</code></pre><table><thead><tr><th>参数</th><th align="right">作用</th><th align="right">类型</th><th align="center">默认值</th></tr></thead><tbody><tr><td>bgColor</td><td align="right">背景颜色类名</td><td align="right">String</td><td align="center">‘’</td></tr><tr><td>isBack</td><td align="right">是否开启返回</td><td align="right">Boolean</td><td align="center">false</td></tr><tr><td>isCustom</td><td align="right">是否开启左侧胶囊</td><td align="right">Boolean</td><td align="center">false</td></tr><tr><td>bgImage</td><td align="right">背景图片路径</td><td align="right">String</td><td align="center">‘’</td></tr></tbody></table><table><thead><tr><th>slot块</th><th align="right">作用</th></tr></thead><tbody><tr><td>backText</td><td align="right">返回时的文字</td></tr><tr><td>content</td><td align="right">中间区域</td></tr><tr><td>right</td><td align="right">右侧区域(小程序端可使用范围很窄！)</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>技术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>小程序</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JavaScript 浏览器新开窗口的正确方式</title>
     <link href="/2020/05/13/js/opener/"/>
     <url>/2020/05/13/js/opener/</url>
@@ -470,9 +495,9 @@
     
     <tags>
       
-      <tag>Taro</tag>
-      
       <tag>小程序</tag>
+      
+      <tag>Taro</tag>
       
     </tags>
     
