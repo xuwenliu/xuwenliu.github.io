@@ -1,6 +1,6 @@
 ---
 title: 养生之喝点什么
-index_img: /img/life/lianai.jpg
+index_img: /img/life/gouqi.jpg
 tags: [养生]
 category: 生活
 abbrlink: f94fb1be
