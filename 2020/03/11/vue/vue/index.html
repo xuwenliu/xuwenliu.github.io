@@ -145,7 +145,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    202 字
+                    873 字
                   </span>
                 
 
@@ -153,7 +153,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      1 分钟
+                      3 分钟
                   </span>
                 
 
@@ -181,12 +181,12 @@
           <div class="post-content mx-auto" id="post">
             
               <p
-                class="note note-warning">本文最后更新于：2020-05-02 23:11:54</p>
+                class="note note-warning">本文最后更新于：2020-05-16 23:32:52</p>
             
             <div class="markdown-body">
-              <h3 id="v-text-v-html-中如何使用过滤器"><a href="#v-text-v-html-中如何使用过滤器" class="headerlink" title="v-text/v-html 中如何使用过滤器"></a>v-text/v-html 中如何使用过滤器</h3><p>Vue2.x 不再支持在 <code>v-html</code> 中使用过滤器Vue2.x 的过滤器现在只能应用在“Mustache”语法 (双大括号) 的文本插值 和 <code>v-bind</code> 中。<br>如果要使用采用如下方式：</p>
+              <h3 id="1-v-text-v-html-中如何使用过滤器"><a href="#1-v-text-v-html-中如何使用过滤器" class="headerlink" title="1.v-text/v-html 中如何使用过滤器"></a>1.v-text/v-html 中如何使用过滤器</h3><p>Vue2.x 不再支持在 <code>v-html</code> 中使用过滤器Vue2.x 的过滤器现在只能应用在“Mustache”语法 (双大括号) 的文本插值 和 <code>v-bind</code> 中。<br>如果要使用采用如下方式：</p>
 <p><code>v-html=&quot;$options.filters.过滤器名称(需要过滤的内容,[过滤器需要的参数])&quot;</code></p>
-<h3 id="在Vue组件中动态生成的DOM类名样式不作用-deep"><a href="#在Vue组件中动态生成的DOM类名样式不作用-deep" class="headerlink" title="在Vue组件中动态生成的DOM类名样式不作用-/deep/"></a>在Vue组件中动态生成的DOM类名样式不作用-/deep/</h3><pre><code class="html">&lt;template&gt;
+<h3 id="2-在Vue组件中动态生成的DOM类名样式不作用-deep"><a href="#2-在Vue组件中动态生成的DOM类名样式不作用-deep" class="headerlink" title="2.在Vue组件中动态生成的DOM类名样式不作用-/deep/"></a>2.在Vue组件中动态生成的DOM类名样式不作用-/deep/</h3><pre><code class="html">&lt;template&gt;
     &lt;div id=&quot;app&quot;&gt;
         &lt;div v-text=&quot;text&quot;&gt;&lt;/div&gt;
     &lt;/div&gt;
@@ -209,6 +209,126 @@
 &lt;/style&gt;
 </code></pre>
 <p>注意：/deep/ 只是在最外层使用，不要嵌套使用。<br>参考文档：<a href="https://vue-loader.vuejs.org/guide/scoped-css.html" target="_blank" rel="noopener">deep</a></p>
+<h3 id="3-使用a标签打电话"><a href="#3-使用a标签打电话" class="headerlink" title="3.使用a标签打电话"></a>3.使用a标签打电话</h3><pre><code class="html">&lt;a :href=&quot;&#39;tel:&#39;+ phone&quot;&gt;打电话&lt;/a&gt;</code></pre>
+<h3 id="4-注册自定义指令"><a href="#4-注册自定义指令" class="headerlink" title="4.注册自定义指令"></a>4.注册自定义指令</h3><ul>
+<li><p>全局注册</p>
+<pre><code class="html">  &lt;div id=&quot;app&quot;&gt;
+      &lt;p&gt;页面载入时，input 元素自动获取焦点：&lt;/p&gt;
+      &lt;input v-focus&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+  // 注册一个全局自定义指令 v-focus
+  Vue.directive(&#39;focus&#39;, {
+  // 当绑定元素插入到 DOM 中。
+  inserted: function (el) {
+      // 聚焦元素
+      el.focus()
+  }
+  })
+  // 创建根实例
+  new Vue({
+  el: &#39;#app&#39;
+  })
+  &lt;/script&gt;</code></pre>
+</li>
+<li><p>局部注册</p>
+<pre><code class="html">  &lt;div id=&quot;app&quot;&gt;
+  &lt;p&gt;页面载入时，input 元素自动获取焦点：&lt;/p&gt;
+  &lt;input v-focus&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+  // 创建根实例
+  new Vue({
+  el: &#39;#app&#39;,
+  directives: {
+      // 注册一个局部的自定义指令 v-focus
+      focus: {
+      // 指令的定义
+      inserted: function (el) {
+          // 聚焦元素
+          el.focus()
+      }
+      }
+  }
+  })
+  &lt;/script&gt;</code></pre>
+</li>
+</ul>
+<h3 id="5-Prop-验证"><a href="#5-Prop-验证" class="headerlink" title="5.Prop 验证"></a>5.Prop 验证</h3><p>我们可以为组件的 prop 指定验证要求，例如你知道的这些类型。如果有一个需求没有被满足，则 Vue 会在浏览器控制台中警告你。这在开发一个会被别人用到的组件时尤其有帮助。</p>
+<p>为了定制 prop 的验证方式，你可以为 props 中的值提供一个带有验证需求的<code>对象</code>，而不是一个<code>字符串数组</code>。例如：</p>
+<pre><code class="js">Vue.component(&#39;my-component&#39;, {
+  props: {
+    // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
+    propA: Number,
+    // 多个可能的类型
+    propB: [String, Number],
+    // 必填的字符串
+    propC: {
+      type: String,
+      required: true
+    },
+    // 带有默认值的数字
+    propD: {
+      type: Number,
+      default: 100
+    },
+    // 带有默认值的对象
+    propE: {
+      type: Object,
+      // 对象或数组默认值必须从一个工厂函数获取
+      default: function () {
+        return { message: &#39;hello&#39; }
+      }
+    },
+    // 自定义验证函数
+    propF: {
+      validator: function (value) {
+        // 这个值必须匹配下列字符串中的一个
+        return [&#39;success&#39;, &#39;warning&#39;, &#39;danger&#39;].indexOf(value) !== -1
+      }
+    }
+  }
+})</code></pre>
+<h3 id="6-子组件传数据到父组件"><a href="#6-子组件传数据到父组件" class="headerlink" title="6.子组件传数据到父组件"></a>6.子组件传数据到父组件</h3><p><img src="/img/vue/%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%92.png" srcset="/img/loading.gif" alt="子组件传数据到父组件"></p>
+<h3 id="7-生命周期"><a href="#7-生命周期" class="headerlink" title="7.生命周期"></a>7.生命周期</h3><p><img src="/img/vue/lifecycle.png" srcset="/img/loading.gif" alt="vue2.x生命周期"></p>
+<h3 id="8-生成二维码"><a href="#8-生成二维码" class="headerlink" title="8.生成二维码"></a>8.生成二维码</h3><p><a href="https://github.com/theomessin/vue-qriously#readme" target="_blank" rel="noopener">vue-qriously</a><br><a href="https://segmentfault.com/a/1190000014875645" target="_blank" rel="noopener">生成二维码并下载</a></p>
+<ul>
+<li><p>如何安装并导入</p>
+<pre><code class="js">  // ES6
+  import Vue from &#39;vue&#39;
+  import VueQriously from &#39;vue-qriously&#39;
+  Vue.use(VueQriously)
+
+  // ES5
+  var Vue = require(&#39;vue&#39;)
+  Vue.use(require(&#39;vue-qriously&#39;).default)
+</code></pre>
+</li>
+<li><p>如何使用</p>
+<pre><code class="html">  &lt;qriously value=&quot;Hello World!&quot; :size=&quot;200&quot; /&gt;</code></pre>
+<p>参数：</p>
+</li>
+<li><p>background: string 二维码背景  默认：’white’</p>
+</li>
+<li><p>backgroundAlpha:number 二维码背景透明度 默认： 1.0</p>
+</li>
+<li><p>foreground:string 二维码前景色 默认：’black’</p>
+</li>
+<li><p>foregroundAlpha:number 二维码前景色透明度 默认：1.0</p>
+</li>
+<li><p>level:string 二维码误差校验等级(L,M,Q,H) 默认：’L’</p>
+</li>
+<li><p>mime:string 二维码图片的mine type</p>
+</li>
+<li><p>padding:number 二维码padding值(像素) 默认null(auto)</p>
+</li>
+<li><p>size:number 二维码大小(像素) 默认：100</p>
+</li>
+<li><p>value:string 二维码内容</p>
+</li>
+</ul>
 
             </div>
             <hr>

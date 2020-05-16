@@ -161,6 +161,59 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/03/12/taro/taro/" target="_blank">
+          <img src="/img/taro.png" srcset="/img/loading.gif" alt="Taro 采坑指南"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/03/12/taro/taro/">
+        <p class="h4 index-header">Taro 采坑指南</p>
+      </a>
+
+      <a href="/2020/03/12/taro/taro/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">在Taro中如何正确给自定义组件传递样式类需要利用 externalClasses 定义段定义若干个外部样式类。这个特性从小程序基础库版本 1.9.90 开始支持。
+/* CustomComp.js */
+export default class CustomComp extends Component {
+  static externalClasses = [&#39;my-class&#39;]
+
+  render () {
+    return &lt;View className=&quot;my-class&quot;&gt;这段文本的颜色由组件外的 class 决定&lt;/Vi</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-12&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>&nbsp;
+          
+            <a href="/tags/Taro/">Taro</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2020/03/11/js/es6/" target="_blank">
           <img src="/img/es6.jpg" srcset="/img/loading.gif" alt="ES6/ES7 常用集锦"
                class="index-img img-fluid rounded index-thumbnails">
@@ -282,11 +335,11 @@ console.log(...set); //1 2 3 4 5
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">v-text/v-html 中如何使用过滤器Vue2.x 不再支持在 v-html 中使用过滤器Vue2.x 的过滤器现在只能应用在“Mustache”语法 (双大括号) 的文本插值 和 v-bind 中。如果要使用采用如下方式：
+          <div class="index-text mb-1">1.v-text/v-html 中如何使用过滤器Vue2.x 不再支持在 v-html 中使用过滤器Vue2.x 的过滤器现在只能应用在“Mustache”语法 (双大括号) 的文本插值 和 v-bind 中。如果要使用采用如下方式：
 v-html=&quot;$options.filters.过滤器名称(需要过滤的内容,[过滤器需要的参数])&quot;
-在Vue组件中动态生成的DOM类名样式不作用-/deep/&lt;template&gt;
+2.在Vue组件中动态生成的DOM类名样式不作用-/deep/&lt;template&gt;
     &lt;div id=&quot;app&quot;&gt;
-        &lt;div v-text=&quot;text&quot;&g</div>
+        &lt;div v-text=&quot;text&quo</div>
         </div>
       </a>
 
